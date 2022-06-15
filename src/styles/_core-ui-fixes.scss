@@ -1,0 +1,29 @@
+// CSS to make coreui work properly woth the other css frameworks
+
+.c-app {
+    color: #3c4b64;
+    background-color: #ebedef;
+    --color: #3c4b64;
+    --elevation-base-color: 60, 75, 100;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+.c-header-shadow {
+    border: 0;
+    box-shadow: 0 2px 2px 0 rgba(60,75,100,.14), 0 3px 1px -2px rgba(60,75,100,.12), 0 1px 5px 0 rgba(60,75,100,.2);
+    -webkit-clip-path: inset(0 0 -1000px 0);
+    clip-path: inset(0 0 -1000px 0);
+}
+
+// any subheader may start after 56px if it should be sticky
+.c-subheader {
+    border-top: 1px solid #d8dbe0;
+    top: 56px;
+    z-index: 1030;
+    position: -webkit-sticky;
+    position: sticky;
+}

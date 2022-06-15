@@ -1,0 +1,122 @@
+<!--
+    action bar in breadcrumb
+    https://coreui.io/docs/components/bootstrap/breadcrumb/
+    https://getbootstrap.com/docs/4.0/utilities/position/
+    see also styles.scss .c-subheader.sticky-top
+-->
+<div class="c-subheader sticky-top justify-content-between px-3 c-header-shadow">
+    <ol class="breadcrumb border-0 m-0 px-0 px-md-3">
+        <li class="breadcrumb-item" aria-current="page">Home</li>
+        <li class="breadcrumb-item"><a routerLink="/table">Material Table</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Active Form</li>
+    </ol>
+    <!-- Breadcrumb Menu-->
+    <div class="c-subheader-nav">
+        <div class="btn-group" role="group">
+            <button mat-button matTooltip="Material Button">Click me!</button>
+            <a class="btn" href="#" matTooltip="font awesome icon"><i class="fa fa-floppy-o"></i> Save</a>
+            <!-- https://coreui.io/docs/components/bootstrap/icons/#coreui-icons-free-502-icons -->
+            <a class="btn" href="#" matTooltip="coreui icon"><i class="cil-action-undo"></i> Cancel</a>
+        </div>
+    </div>
+</div>
+<main class="c-main">
+
+    <div class="container-fluid">
+        <mat-card class="mb-4">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="c-callout c-callout-info b-t-1 b-r-1 b-b-1">
+                        <small class="text-muted">New Clients</small><br>
+                        <strong class="h4">9,123</strong>
+                    </div>
+                </div>
+                <!--/.col-->
+                <div class="col-sm-2">
+                    <div class="c-callout c-callout-danger b-t-1 b-r-1 b-b-1">
+                        <small class="text-muted">Recuring Clients</small><br>
+                        <strong class="h4">22,643</strong>
+                    </div>
+                </div>
+                <!--/.col-->
+                <div class="col-sm-2">
+                    <div class="c-callout c-callout-warning b-t-1 b-r-1 b-b-1">
+                        <small class="text-muted">Pageviews</small><br>
+                        <strong class="h4">78,623</strong>
+                    </div>
+                </div>
+                <!--/.col-->
+                <div class="col-sm-2">
+                    <div class="c-callout c-callout-success b-t-1 b-r-1 b-b-1">
+                        <small class="text-muted">Organic</small><br>
+                        <strong class="h4">49,123</strong>
+                    </div>
+                </div>
+                <!--/.col-->
+                <div class="col-sm-2">
+                    <div class="c-callout b-t-1 b-r-1 b-b-1">
+                        <small class="text-muted">CTR</small><br>
+                        <strong class="h4">23%</strong>
+                    </div>
+                </div>
+                <!--/.col-->
+                <div class="col-sm-2">
+                    <div class="c-callout c-callout-primary b-t-1 b-r-1 b-b-1">
+                        <small class="text-muted">Bounce Rate</small><br>
+                        <strong class="h4">5%</strong>
+                        <P>TESTE</P>
+                    </div>
+                </div>
+                <!--/.col-->
+            </div>
+            <!--/.row-->
+        </mat-card>
+    </div>
+    <div class="container-fluid">
+        <mat-card class="mb-4">
+            <mat-card-header>
+                <mat-card-title>Card Title </mat-card-title>
+                <mat-card-subtitle>Subtitle</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-sm">
+                        <mat-form-field>
+                            <input matInput placeholder="First Name">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm">
+                        <mat-form-field>
+                            <input matInput placeholder="Last Name">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm">
+                        <mat-form-field>
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm">
+                        <mat-radio-group aria-label="Select an option">
+                            <mat-radio-button class="mt-4" value="1">Option 1</mat-radio-button>
+                            <mat-radio-button class="mt-4" value="2">Option 2</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+</main>
