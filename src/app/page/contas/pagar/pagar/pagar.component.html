@@ -1,0 +1,182 @@
+<main class="c-main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12"></div>
+            <!-- ngFor for para perpagarrer o array de erros e se existir erros imprimir na tela -->
+            <div class="alert alert-danger" role="alert" *ngFor="let erro of mensagemErros">
+                {{ erro }}
+            </div>
+        </div>
+        <div class="mat-elevation-z8">
+            <mat-card>
+                <mat-card-title>
+                    <mat-icon>color_lens</mat-icon>
+                    Contas a pagar
+                </mat-card-title>
+                <mat-tab-group mat-align-tabs="start" #tabGroup>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon>add</mat-icon>
+                            Cadastrar conta
+                        </ng-template>
+                        <!-- CADASATRANDO OBJETO INICIO -->
+                        <mat-card>
+                            <form [formGroup]="formulario" (ngSubmit)="submit()">
+                                <!--passa qual é o formulario e o evento-->
+                                <mat-form-field class="full-width">
+                                    <mat-label>ID</mat-label>
+                                    <input formControlName="id" matInput readonly>
+                                </mat-form-field>
+
+                                <mat-form-field class="full-width" appearance="fill">
+                                    <mat-label>Descrição *</mat-label>
+                                    <input maxlength="100" formControlName="descricao" matInput
+                                        placeholder="Digite a descrição da conta">
+                                </mat-form-field>
+
+                                <mat-form-field class="full-width" appearance="fill">
+                                    <mat-label>Observação</mat-label>
+                                    <input maxlength="150" formControlName="observacao" matInput
+                                        placeholder="Informações adicionas">
+                                </mat-form-field>
+
+                                <mat-form-field class="full-width" appearance="fill">
+                                    <mat-label>Valor a pagar *</mat-label>
+                                    <span matPrefix>R$ &nbsp;</span>
+                                    <input maxlength="20" formControlName="valor" mask="separator.2" thousandSeparator="." matInput placeholder="1.000,00">
+                                </mat-form-field>
+
+                                <mat-form-field class="full-width" appearance="fill">
+                                    <mat-label>Vencimento *</mat-label>
+                                    <input maxlength="10" formControlName="vencimento" matInput placeholder="00/00/0000"
+                                     [matDatepicker]="picker">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+
+                                <mat-form-field class="full-width" appearance="fill">
+                                    <mat-label>Situação da conta *</mat-label>
+                                    <mat-select formControlName="situacao" required>
+                                        <mat-option value="PAGO">Pago</mat-option>
+                                        <mat-option value="PAGAR">Pendente</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+
+                                <div class="row justify-content-between">
+                                    <div class="col-6">
+                                        <!-- habilita desabilita botão com o forma validate -->
+                                        <button (click)="limparFormulario()" mat-raised-button>
+                                            <mat-icon>insert_drive_file</mat-icon>
+                                            Limpar
+                                        </button>
+                                    </div>
+                                    <div class="col-6" align="right">
+                                        <!-- habilita desabilita botão com o forma validate -->
+                                        <button [disabled]="!formulario.valid" mat-raised-button color="primary">
+                                            <mat-icon>save</mat-icon>
+                                            Salvar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="esp-top">
+                                <!-- verifica se tem erros no preenchimento do campo e se inicio o preenchimento -->
+                                <div *ngIf="formulario.controls.descricao.errors && !formulario.controls.descricao.pristine"
+                                    class="alert alert-warning" role="alert">
+                                    Campo nome é obrigatório!
+                                </div>
+                                <!-- verifica se tem erros no preenchimento do campo e se inicio o preenchimento -->
+                                <div *ngIf="formulario.controls.observacao.errors && !formulario.controls.observacao.pristine"
+                                    class="alert alert-warning" role="alert">
+                                    Campo abreviacao deve conter 2 caracteres!
+                                </div>
+                            </div>
+                        </mat-card>
+                    </mat-tab>
+                    <!-- CADASATRANDO OBJETO INICIO -->
+
+                    <!-- LISTANDO TODAS A PAGAR INICIO -->
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon>list</mat-icon>
+                            Lista de contas a pagar
+                        </ng-template>
+                        <mat-card>
+                            <!-- //inicio da tabela -->
+                            <table mat-table [dataSource]="pagares" class="full-width">
+                                <ng-container matColumnDef="id">
+                                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                                    <td mat-cell *matCellDef="let pagar"> {{ pagar.id }} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="descricao">
+                                    <th mat-header-cell *matHeaderCellDef> Descricao </th>
+                                    <td mat-cell *matCellDef="let pagar"> {{pagar.descricao }} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="valor">
+                                    <th mat-header-cell *matHeaderCellDef>Valor</th>
+                                    <td mat-cell *matCellDef="let pagar"> {{ pagar.valor.valorFormatado }} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="vencimento">
+                                    <th mat-header-cell *matHeaderCellDef>Vencimento</th>
+                                    <td mat-cell *matCellDef="let pagar"> {{pagar.vencimento }} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="situacao">
+                                    <th mat-header-cell *matHeaderCellDef>Situacao</th>
+                                    <td mat-cell *matCellDef="let pagar">
+                                        <div *ngIf="pagar.situacao=='PAGO'; else elseBlock">
+                                            <span class="badge badge-success">Pago
+                                            </span>
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <span class="badge badge-warning">Pendente
+                                            </span>
+                                        </ng-template>
+                                    </td>
+                                    <ng-template #elseBlock>Content to render when condition is false.</ng-template>
+                                </ng-container>
+
+                                <ng-container matColumnDef="excluir">
+                                    <th mat-header-cell *matHeaderCellDef>Excluir</th>
+                                    <td mat-cell *matCellDef="let pagar">
+                                        <button (click)="openDialog(pagar.id)" mat-icon-button color="warn">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="editar">
+                                    <th mat-header-cell *matHeaderCellDef>Editar</th>
+                                    <td mat-cell *matCellDef="let pagar">
+                                        <button (click)="editar(pagar.id)" (click)="tabGroup.selectedIndex = 0"
+                                        mat-icon-button color="accent">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </td>
+                                </ng-container>
+
+
+                                <!-- definir como vai ser as linhas e a ordem das colunas -->
+                                <tr mat-header-row *matHeaderRowDef="ordemColunasTabela"></tr>
+                                <tr mat-row *matRowDef="let row; columns: ordemColunasTabela;"></tr>
+                            </table>
+
+                            <!-- paginação -->
+                            <mat-paginator [length]="totalElementos" [pageSize]="tamanho"
+                                [pageSizeOptions]="pageSizeOptions" (page)="paginar($event)">
+                                <!-- evento de paginar -->
+                            </mat-paginator>
+
+                        </mat-card>
+                    </mat-tab>
+                    <!-- LISTANDO TODAS A PAGAR FIM -->
+                </mat-tab-group>
+            </mat-card>
+        </div>
+    </div>
+
+</main>

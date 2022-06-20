@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Excluir item</h2>
+<mat-dialog-content class="mat-typography">
+    <h3>Tem certeza que deseja excluir o item</h3>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Excluir</button>
+</mat-dialog-actions>

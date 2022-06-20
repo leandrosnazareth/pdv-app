@@ -1,0 +1,11 @@
+// Import styles
+@import "~@coreui/coreui/scss/coreui";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+$roboto-font-path: "~roboto-fontface/fonts" !default;
+@import "~roboto-fontface/css/roboto/sass/roboto-fontface";
+$material-icons-font-path: '~material-icons/iconfont/';
+@import '~material-icons/iconfont/material-icons.scss';
+
+@import 'core-ui-fixes';
+@import 'material-fixes';
+

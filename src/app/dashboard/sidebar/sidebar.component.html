@@ -1,0 +1,108 @@
+<!--
+https://coreui.io/docs/components/sidebar/
+-->
+<!-- style="background-color: #e3f2fd;" mudar a cor -->
+<ul class="c-sidebar-nav">
+    <!-- <li class="c-sidebar-nav-title">new Vidros menu</li>
+    <mat-divider></mat-divider> 
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" matRipple routerLink="orcamento" routerLinkActive="c-active">
+            <i class="c-sidebar-nav-icon">
+                <mat-icon>shopping_cart</mat-icon>
+            </i> Orçamento
+        </a>
+    </li>
+
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" matRipple routerLink="venda" routerLinkActive="c-active">
+            <i class="c-sidebar-nav-icon">
+                <mat-icon>shop</mat-icon>
+            </i> Venda
+        </a>
+    </li> -->
+
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" matRipple routerLink="home" routerLinkActive="c-active">
+            <!-- core ui icon -->
+            <i class="c-sidebar-nav-icon cil-home"></i> Home
+        </a>
+    </li>
+
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" matRipple routerLink="product" routerLinkActive="c-active">
+            <i class="c-sidebar-nav-icon">
+                <mat-icon>request_page</mat-icon>
+            </i> Produto
+        </a>
+    </li>
+
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" matRipple routerLink="pagar" routerLinkActive="c-active">
+            <i class="c-sidebar-nav-icon">
+                <mat-icon>request_page</mat-icon>
+            </i> Conta Pagar
+        </a>
+    </li>
+
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" matRipple routerLink="table" routerLinkActive="c-active">
+            <!-- fontawesome icon -->
+            <i class="c-sidebar-nav-icon fa fa-table"></i> Material Table
+        </a>
+    </li>
+
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" matRipple href="https://github.com/sterlp/admin-template">
+            <i class="c-sidebar-nav-icon fa fa-github"></i> Go to Github
+            <span class="badge badge-primary">NEW</span>
+        </a>
+    </li>
+
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" matRipple href="https://coreui.io/docs/getting-started/introduction/"
+            target="_blank">
+            <i class="c-sidebar-nav-icon icon-book-open"></i> CoreUI Doc
+        </a>
+    </li>
+
+    <li class="c-sidebar-nav-item">
+        <a class="c-sidebar-nav-link" matRipple href="https://material.angular.io/components/categories"
+            target="_blank">
+            <i class="c-sidebar-nav-icon icon-book-open"></i> Angular Material
+        </a>
+    </li>
+
+
+    <li class="c-sidebar-nav-dropdown">
+        <a class="c-sidebar-nav-dropdown-toggle" matRipple appToggle>
+            <i class="c-sidebar-nav-icon cil-library"></i> Icons libs
+        </a>
+
+        <ul class="c-sidebar-nav-dropdown-items">
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" matRipple href="https://simplelineicons.github.io/" target="_blank">
+                    <!-- simple line icon -->
+                    <i class="c-sidebar-nav-icon icon-doc"></i> Simple Line Icons
+                </a>
+            </li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="https://fontawesome.com/v4.7.0/icons/" target="_blank">
+                    <i class="c-sidebar-nav-icon fa fa-flag"></i> Font Awesome
+                </a>
+            </li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="https://material.io/resources/icons/" target="_blank">
+                    <mat-icon class="c-sidebar-nav-icon">link</mat-icon> Material Icons
+                </a>
+            </li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link"
+                    href="https://coreui.io/docs/icons/icons-list/#coreui-icons-free-502-icons" target="_blank">
+                    <i class="c-sidebar-nav-icon icon-doc"></i> CoreUI free icons
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!-- conteudo da página -->
+    <ng-content></ng-content>
+</ul>
