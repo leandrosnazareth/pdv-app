@@ -36,6 +36,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { ProductComponent } from './page/product/product.component';
 import { CorService } from './service/cor.service';
 import { ConfirmaDeleteComponent } from './util/confirma-delete/confirma-delete.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -78,6 +79,7 @@ import { ConfirmaDeleteComponent } from './util/confirma-delete/confirma-delete.
     MatSnackBarModule,
     MatSelectModule,
     MatBadgeModule,
+    MatChipsModule,
     NgxMaskModule.forRoot(
       { // não salvar a mascara
         dropSpecialCharacters: false

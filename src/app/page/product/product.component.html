@@ -108,14 +108,27 @@
                                 <!-- Coluna preco -->
                                 <ng-container matColumnDef="price">
                                     <th mat-header-cell *matHeaderCellDef>Preço</th>
-                                    <td mat-cell *matCellDef="let product"> {{ product.price }} </td>
+                                    <td mat-cell *matCellDef="let product"> {{ product.price.valorFormatado }} </td>
                                 </ng-container>
 
-                                <!-- Coluna preco -->
+                                <!-- coluna status -->
+                                <ng-container matColumnDef="active">
+                                    <th mat-header-cell *matHeaderCellDef>Status</th>
+                                    <td mat-cell *matCellDef="let product">
+                                        <div *ngIf="product.active==true; else elseBlock">
+                                            <mat-chip color="primary" selected>Ativo</mat-chip>
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <mat-chip color="accent" selected>Inativo</mat-chip>
+                                        </ng-template>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Coluna preco
                                 <ng-container matColumnDef="active">
                                     <th mat-header-cell *matHeaderCellDef>Status</th>
                                     <td mat-cell *matCellDef="let product"> {{ product.active }} </td>
-                                </ng-container>
+                                </ng-container> -->
 
                                 <ng-container matColumnDef="excluir">
                                     <th mat-header-cell *matHeaderCellDef>Excluir</th>

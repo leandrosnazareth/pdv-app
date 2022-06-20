@@ -123,7 +123,7 @@ export class ProductComponent implements OnInit {
       // cria e adiciona no objeto
       this.formulario.controls.id.setValue(id);
       this.formulario.controls.name.setValue(response.name);
-      this.formulario.controls.price.setValue(response.price.toString().replace(".", ","));
+      this.formulario.controls.price.setValue((response.price.valorFormatado).replace("R$ "));
       this.formulario.controls.active.setValue(response.active);
     })
   }
