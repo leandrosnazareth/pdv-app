@@ -37,7 +37,10 @@
                                     <mat-label>Preço *</mat-label>
                                     <span matPrefix>R$ &nbsp;</span>
                                     <input maxlength="20" formControlName="price" mask="separator.2"
-                                        thousandSeparator="." matInput placeholder="1.000,00">
+                                        thousandSeparator="." matInput placeholder="1.000,00" required>
+                                    <mat-error *ngIf="formulario.controls.price.hasError('required')">Preço é
+                                        obrigatório! Informe 0 para itens sem preço.
+                                    </mat-error>
                                 </mat-form-field>
 
                                 <mat-form-field class="full-width" appearance="fill">

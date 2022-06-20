@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,10 +32,10 @@ import { CorComponent } from './page/item/cor/cor.component';
 import { TableComponent } from './page/table/table.component';
 import { PagarService } from './service/contas/pagar.service';
 ///////componentes add posteriormente
+import { NgxMaskModule } from 'ngx-mask';
+import { ProductComponent } from './page/product/product.component';
 import { CorService } from './service/cor.service';
 import { ConfirmaDeleteComponent } from './util/confirma-delete/confirma-delete.component';
-import { NgxMaskModule, IConfig } from 'ngx-mask';
-import { ProductComponent } from './page/product/product.component'
 
 
 
@@ -88,7 +88,18 @@ import { ProductComponent } from './page/product/product.component'
     CorService,
     PagarService,
     //informar formato da data local
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt'
+    },
+
+    /* if you don't provide the currency symbol in the pipe, 
+    this is going to be the default symbol (R$) ... */
+    {
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: 'BRL'
+    }
   ],
   bootstrap: [AppComponent]
 })

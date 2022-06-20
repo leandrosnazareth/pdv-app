@@ -5,8 +5,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:8080/',
-  // apiBaseUrl: 'http://localhost:8080/api/vidros/',
+  apiBaseUrl: 'http://localhost:8080/api/pdv/',
 };
 
 /*
