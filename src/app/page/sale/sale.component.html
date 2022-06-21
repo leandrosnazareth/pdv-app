@@ -12,14 +12,29 @@
                 <mat-grid-tile [colspan]="5" [rowspan]="1">
                     Caixa Livre
                 </mat-grid-tile>
-                <mat-grid-tile [colspan]="3" [rowspan]="6">
+                <mat-grid-tile [colspan]="3" [rowspan]="5">
                     Produtos
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="2" [rowspan]="3">
-                    Logomarca
+                    <!-- Logomarca -->
+                    <img mat-card-image src="/assets/images/logopdv.png" alt="Logo demo do sistema">
                 </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="3">
-                    Entrada de códigos de barras
+                <mat-grid-tile [colspan]="2" [rowspan]="2">
+                    <mat-card>
+                        <!-- ENTRADA DE DADOS CÓDIGO DE BARRAS -->
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Código do produto</mat-label>
+                            <input matInput placeholder="0000000000000">
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Quantidade</mat-label>
+                            <input matInput placeholder="1">
+                        </mat-form-field>
+
+                        <button class="full-width" mat-raised-button color="primary">Incluir Produto</button>
+
+                    </mat-card>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="5" [rowspan]="1">
                     R$ Valor total a pagar

@@ -1,4 +1,31 @@
 mat-grid-tile {
-    background: lightblue;
-    /* background: dbe2e8; */
- }
+    background: whitesmoke;
+    /* background: lightblue; */
+    /* background: #3f48cc; */
+}
+
+.full-width {
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.half-width {
+    width: 50%
+}
+
+.esp-top {
+    padding-top: 10px;
+}
+
+.esp-right {
+    padding-right: 10px;
+}
+
+.esp-bottom {
+    padding-bottom: 10px;
+}
+
+.esp-left {
+    padding-left: 10px;
+}
