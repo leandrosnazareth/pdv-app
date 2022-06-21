@@ -116,19 +116,13 @@
                                     <th mat-header-cell *matHeaderCellDef>Status</th>
                                     <td mat-cell *matCellDef="let product">
                                         <div *ngIf="product.active==true; else elseBlock">
-                                            <mat-chip color="primary" selected>Ativo</mat-chip>
+                                            <p class="text-primary">Ativo</p>
                                         </div>
                                         <ng-template #elseBlock>
-                                            <mat-chip color="accent" selected>Inativo</mat-chip>
+                                            <p class="text-danger">Inativo</p>
                                         </ng-template>
                                     </td>
                                 </ng-container>
-
-                                <!-- Coluna preco
-                                <ng-container matColumnDef="active">
-                                    <th mat-header-cell *matHeaderCellDef>Status</th>
-                                    <td mat-cell *matCellDef="let product"> {{ product.active }} </td>
-                                </ng-container> -->
 
                                 <ng-container matColumnDef="excluir">
                                     <th mat-header-cell *matHeaderCellDef>Excluir</th>

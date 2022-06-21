@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -26,17 +26,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { ToggleDirective } from './dashboard/sidebar/toggle.directive';
-import { PagarComponent } from './page/contas/pagar/pagar/pagar.component';
 import { HomeComponent } from './page/home/home.component';
-import { CorComponent } from './page/item/cor/cor.component';
-import { TableComponent } from './page/table/table.component';
-import { PagarService } from './service/contas/pagar.service';
 ///////componentes add posteriormente
 import { NgxMaskModule } from 'ngx-mask';
 import { ProductComponent } from './page/product/product.component';
-import { CorService } from './service/cor.service';
 import { ConfirmaDeleteComponent } from './util/confirma-delete/confirma-delete.component';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { ProductService } from './service/product.service';
+import { SaleComponent } from './page/sale/sale.component';
 
 
 
@@ -46,11 +44,9 @@ import {MatChipsModule} from '@angular/material/chips';
     SidebarComponent,
     ToggleDirective,
     HomeComponent,
-    TableComponent,
-    CorComponent,
-    PagarComponent,
     ConfirmaDeleteComponent,
-    ProductComponent
+    ProductComponent,
+    SaleComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +67,9 @@ import {MatChipsModule} from '@angular/material/chips';
     MatTabsModule,
     MatDividerModule,
     MatToolbarModule,
+    MatGridListModule,
+
+    FormsModule,
 
     MatDatepickerModule,
     HttpClientModule,
@@ -87,8 +86,7 @@ import {MatChipsModule} from '@angular/material/chips';
     ),
   ],
   providers: [
-    CorService,
-    PagarService,
+    ProductService,
     //informar formato da data local
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     {
