@@ -1,10 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
-import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatNativeDateModule, MatRippleModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -28,15 +28,17 @@ import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { ToggleDirective } from './dashboard/sidebar/toggle.directive';
 import { HomeComponent } from './page/home/home.component';
 ///////componentes add posteriormente
+import { MatChipsModule } from '@angular/material/chips';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { NgxMaskModule } from 'ngx-mask';
 import { ProductComponent } from './page/product/product.component';
-import { ConfirmaDeleteComponent } from './util/confirma-delete/confirma-delete.component';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatGridListModule} from '@angular/material/grid-list';
-import { ProductService } from './service/product.service';
 import { SaleComponent } from './page/sale/sale.component';
+import { ProductService } from './service/product.service';
+import { ConfirmaDeleteComponent } from './util/confirma-delete/confirma-delete.component';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
-
+registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [
@@ -88,18 +90,19 @@ import { SaleComponent } from './page/sale/sale.component';
   providers: [
     ProductService,
     //informar formato da data local
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
-    {
-      provide: LOCALE_ID,
-      useValue: 'pt'
-    },
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    // { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    // {
+    //   provide: LOCALE_ID,
+    //   useValue: 'pt'
+    // },
 
-    /* if you don't provide the currency symbol in the pipe, 
-    this is going to be the default symbol (R$) ... */
-    {
-      provide: DEFAULT_CURRENCY_CODE,
-      useValue: 'BRL'
-    }
+    // /* if you don't provide the currency symbol in the pipe, 
+    // this is going to be the default symbol (R$) ... */
+    // {
+    //   provide: DEFAULT_CURRENCY_CODE,
+    //   useValue: 'BRL'
+    // }
   ],
   bootstrap: [AppComponent]
 })
