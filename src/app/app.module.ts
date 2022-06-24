@@ -37,6 +37,7 @@ import { ProductService } from './service/product.service';
 import { ConfirmaDeleteComponent } from './util/confirma-delete/confirma-delete.component';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { ExampleDialogComponent } from './page/example-dialog/example-dialog.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -48,7 +49,8 @@ registerLocaleData(localePt, 'pt-BR');
     HomeComponent,
     ConfirmaDeleteComponent,
     ProductComponent,
-    SaleComponent
+    SaleComponent,
+    ExampleDialogComponent
   ],
   imports: [
     BrowserModule,
