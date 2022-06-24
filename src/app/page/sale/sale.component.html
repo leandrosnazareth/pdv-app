@@ -2,16 +2,16 @@
     <ol class="breadcrumb border-0 m-0 px-0 px-md-3">
         <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
         <li class="breadcrumb-item"><a routerLink="/product">Produtos</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Active Form</li>
+        <li class="breadcrumb-item active" aria-current="page">PDV</li>
     </ol>
     <!-- Breadcrumb Menu-->
     <div class="c-subheader-nav">
         <div class="btn-group" role="group">
             <!-- https://coreui.io/docs/components/bootstrap/icons/#coreui-icons-free-502-icons -->
-            <button mat-button matTooltip="Material Button">
-                <i class="cil-note-add"></i> Limpar
+            <button mat-button matTooltip="Limpar dados">
+                <i class="fa fa-file-text-o"></i> Limpar
             </button>
-            <button mat-button matTooltip="Material Button">
+            <button mat-raised-button color="primary" matTooltip="Salvar venda">
                 <i class="fa fa-floppy-o"></i> Save
             </button>
         </div>
@@ -29,7 +29,7 @@
         <div class="mat-elevation-z8">
             <mat-grid-list cols="5" rowHeight="100px">
                 <mat-grid-tile [colspan]="5" [rowspan]="1">
-                    Caixa Livre
+                    <div class="font-30-center"> Caixa Livre </div>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="3" [rowspan]="5" class="full-width">
                     <!-- INICIO TABELA DE PRODUTOS -->
@@ -60,17 +60,20 @@
                                 <!-- Coluna preco -->
                                 <ng-container matColumnDef="price">
                                     <th mat-header-cell *matHeaderCellDef>Preço</th>
-                                    <td mat-cell *matCellDef="let productSold"> {{ productSold.price.valorFormatado }}
+                                    <td mat-cell *matCellDef="let productSold"> {{ productSold.price | currency:'BRL'}}
                                     </td>
-                                    <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency:'BRL'}} </td>
+                                </ng-container>
+
+                                <!-- Coluna preco total -->
+                                <ng-container matColumnDef="priceTotal">
+                                    <th mat-header-cell *matHeaderCellDef>Total</th>
+                                    <td mat-cell *matCellDef="let productSold"> {{ productSold.priceTotal | currency:'BRL'}}
+                                    </td>
                                 </ng-container>
 
                                 <!-- definir como vai ser as linhas e a ordem das colunas -->
-                                <!-- <tr mat-header-row *matHeaderRowDef="ordemColunasTabela; sticky: true"></tr>
-                                <tr mat-row *matRowDef="let row; columns: ordemColunasTabela;"></tr> -->
-                                <tr mat-header-row *matHeaderRowDef="ordemColunasTabela"></tr>
+                                <tr mat-header-row *matHeaderRowDef="ordemColunasTabela; sticky: true"></tr>
                                 <tr mat-row *matRowDef="let row; columns: ordemColunasTabela;"></tr>
-                                <tr mat-footer-row *matFooterRowDef="ordemColunasTabela; sticky: true"></tr>
                             </table>
                         </section>
                         <!-- FIM TABELA DE PRODUTOS -->
@@ -82,7 +85,8 @@
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="2" [rowspan]="2">
                     <mat-card>
-                        <form [formGroup]="formulario" (ngSubmit)="submit()">
+                        <!-- <form [formGroup]="formulario" (ngSubmit)="submit()"></form> -->
+                        <form [formGroup]="formAddItem">
                             <!-- ENTRADA DE DADOS CÓDIGO DE BARRAS -->
                             <mat-form-field class="full-width" appearance="fill">
                                 <mat-label>Código do produto</mat-label>
@@ -96,14 +100,19 @@
                                     placeholder="ex: 1">
                             </mat-form-field>
 
-                            <button class="full-width" mat-raised-button color="primary"
-                                (click)="adicionarItem()">Incluir
-                                Produto</button>
+                            <button class="full-width" mat-raised-button color="primary" (click)="adicionarItem()">
+                                <mat-icon>add</mat-icon>
+                                Incluir Produto
+                            </button>
                         </form>
                     </mat-card>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="5" [rowspan]="1">
-                    R$ Valor total a pagar
+                    <mat-card class="full-width">
+                        <div class="font-30-center">
+                            Valor total a pagar: <b> {{getTotalCost() | currency:'BRL'}} </b>
+                        </div>
+                    </mat-card>
                 </mat-grid-tile>
             </mat-grid-list>
         </div>

@@ -14,6 +14,15 @@ mat-grid-tile {
     width: 50%
 }
 
+.font-30-center {
+    font-size: 35px;
+    text-align: center;
+}
+
+.fonte-cour {
+    font-family: Courier, monospace;
+}
+
 .esp-top {
     padding-top: 10px;
 }
