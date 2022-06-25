@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductService } from 'src/app/service/product.service';
-import { ExampleDialogComponent } from '../example-dialog/example-dialog.component';
+import { SaleDialogComponent } from '../sale-dialog/sale-dialog.component';
 import { ProductSold } from './productSold';
 import { Sale } from './sale';
 @Component({
@@ -51,7 +51,7 @@ export class SaleComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(ExampleDialogComponent, {
+    let dialogRef = this.dialog.open(SaleDialogComponent, {
       width: '500px',
       data: { name: this.name, animal: this.animal }
     });

@@ -28,16 +28,17 @@ import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { ToggleDirective } from './dashboard/sidebar/toggle.directive';
 import { HomeComponent } from './page/home/home.component';
 ///////componentes add posteriormente
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NgxMaskModule } from 'ngx-mask';
 import { ProductComponent } from './page/product/product.component';
+import { SaleDialogComponent } from './page/sale-dialog/sale-dialog.component';
 import { SaleComponent } from './page/sale/sale.component';
 import { ProductService } from './service/product.service';
 import { ConfirmaDeleteComponent } from './util/confirma-delete/confirma-delete.component';
-import { registerLocaleData } from '@angular/common';
-import localePt from '@angular/common/locales/pt';
-import { ExampleDialogComponent } from './page/example-dialog/example-dialog.component';
+import { PaymentService } from './service/payment.service';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -50,7 +51,7 @@ registerLocaleData(localePt, 'pt-BR');
     ConfirmaDeleteComponent,
     ProductComponent,
     SaleComponent,
-    ExampleDialogComponent
+    SaleDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +92,7 @@ registerLocaleData(localePt, 'pt-BR');
   ],
   providers: [
     ProductService,
+    PaymentService,
     //informar formato da data local
     { provide: LOCALE_ID, useValue: 'pt-BR' }
     // { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
