@@ -26,6 +26,7 @@ export class SaleComponent implements OnInit {
   mensagemErros: String[] = []; //array de strings dos erros retornados do backend
   animal: string;
   name: string;
+  totalPagar: any;
 
   constructor(
     private productService: ProductService,
@@ -53,9 +54,9 @@ export class SaleComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(SaleDialogComponent, {
       width: '500px',
-      data: { name: this.name, animal: this.animal }
+      data: { name: this.name, animal: this.totalPagar }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       this.animal = result;
     });
@@ -77,6 +78,7 @@ export class SaleComponent implements OnInit {
   }
 
   getTotalCost() {
-    return this.productsSolds.map(t => t.priceTotal).reduce((acc, value) => acc + value, 0);
+    this.totalPagar = this.productsSolds.map(t => t.priceTotal).reduce((acc, value) => acc + value, 0)
+    return this.totalPagar;
   }
 }

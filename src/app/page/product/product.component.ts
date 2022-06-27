@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -123,7 +123,7 @@ export class ProductComponent implements OnInit {
       // cria e adiciona no objeto
       this.formulario.controls.id.setValue(id);
       this.formulario.controls.name.setValue(response.name);
-      this.formulario.controls.price.setValue((response.price.valorFormatado).replace("R$ "));
+      this.formulario.controls.price.setValue((response.price+"").replace(".",","));
       this.formulario.controls.active.setValue(response.active);
     })
   }

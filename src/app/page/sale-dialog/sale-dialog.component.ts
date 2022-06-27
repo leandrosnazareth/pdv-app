@@ -8,20 +8,24 @@ import { Payment } from '../payment/payment';
   templateUrl: 'sale-dialog.component.html',
 })
 export class SaleDialogComponent {
-
-  private paymentService: PaymentService;
   payments: Payment[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<SaleDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private paymentService: PaymentService) { }
 
   onCancel(): void {
     this.dialogRef.close();
   }
 
+  ngOnInit(): void {
+    this.listPayment();
+  }
+
   listPayment() {
     this.paymentService.findAll().subscribe((response) => {
+      console.log(response + "ENTREI NO PAGAMENTO");
       this.payments = response;
     });
   }
