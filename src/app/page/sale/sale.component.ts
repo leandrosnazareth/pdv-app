@@ -27,6 +27,7 @@ export class SaleComponent implements OnInit {
   animal: string;
   name: string;
   totalPagar: any;
+  statusCaixa = "Caixa Livre";
 
   constructor(
     private productService: ProductService,
@@ -45,6 +46,12 @@ export class SaleComponent implements OnInit {
       id: [null, [Validators.required, Validators.maxLength(13), Validators.minLength(1)]],
       quantidade: [null, [Validators.required, Validators.maxLength(50)]],
     })
+  }
+
+  limparFormulario() {
+    this.formAddItem.reset();
+    this.productsSolds = [];
+    this.statusCaixa = "Caixa Livre";
   }
 
   submit() {
@@ -74,6 +81,8 @@ export class SaleComponent implements OnInit {
         formValues.quantidade
       );
       this.productsSolds = this.productsSolds.concat(productSold);
+      // this.statusCaixa = response.name;
+      this.statusCaixa = "Venda em Aberto";
     })
   }
 

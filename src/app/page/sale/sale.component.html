@@ -7,13 +7,12 @@
     <!-- Breadcrumb Menu-->
     <div class="c-subheader-nav">
         <div class="btn-group" role="group">
-            <!-- https://coreui.io/docs/components/bootstrap/icons/#coreui-icons-free-502-icons -->
-            <button mat-button matTooltip="Limpar dados">
+            <button mat-button matTooltip="Limpar dados" (click)="limparFormulario()">
                 <i class="fa fa-file-text-o"></i> Limpar
             </button>
             <button mat-raised-button color="primary" matTooltip="Salvar venda" (click)="openDialog()">
                 <i class="fa fa-floppy-o"></i> Save
-                
+
             </button>
         </div>
     </div>
@@ -30,7 +29,7 @@
         <div class="mat-elevation-z8">
             <mat-grid-list cols="5" rowHeight="100px">
                 <mat-grid-tile [colspan]="5" [rowspan]="1">
-                    <div class="font-30-center"> Caixa Livre </div>
+                    <div class="font-30-center"> {{statusCaixa}} </div>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="3" [rowspan]="5" class="full-width">
                     <!-- INICIO TABELA DE PRODUTOS -->
@@ -68,7 +67,8 @@
                                 <!-- Coluna preco total -->
                                 <ng-container matColumnDef="priceTotal">
                                     <th mat-header-cell *matHeaderCellDef>Total</th>
-                                    <td mat-cell *matCellDef="let productSold"> {{ productSold.priceTotal | currency:'BRL'}}
+                                    <td mat-cell *matCellDef="let productSold"> {{ productSold.priceTotal |
+                                        currency:'BRL'}}
                                     </td>
                                 </ng-container>
 
