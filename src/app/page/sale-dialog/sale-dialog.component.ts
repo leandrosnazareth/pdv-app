@@ -25,7 +25,6 @@ export class SaleDialogComponent {
 
   listPayment() {
     this.paymentService.findAll().subscribe((response) => {
-      console.log(response + "ENTREI NO PAGAMENTO");
       this.payments = response;
     });
   }

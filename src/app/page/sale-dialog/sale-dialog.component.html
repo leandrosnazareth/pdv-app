@@ -1,26 +1,29 @@
 <h1 mat-dialog-title>Fechamento de venda</h1>
 <div mat-dialog-content>
-    <p>Qual seu animal preferido?</p>
+    <p>Informe os dados para pagamento!</p>
     <mat-form-field appearance="fill">
         <mat-label>Valor Total</mat-label>
-        <input matInput [(ngModel)]="data.animal">
+        <input matInput [(ngModel)]="data.pagar">
     </mat-form-field>
+    <br>
     <mat-form-field appearance="fill">
         <mat-label>Valor Total</mat-label>
-        <input matInput [(ngModel)]="data.animal">
+        <input matInput [(ngModel)]="data.pago">
     </mat-form-field>
+    <br>
     <mat-form-field appearance="fill">
         <mat-label>Valor Total</mat-label>
-        <input matInput [(ngModel)]="data.animal">
+        <input matInput [(ngModel)]="data.troco">
     </mat-form-field>
+    <br>
     <mat-form-field appearance="fill">
         <mat-label>Selecione</mat-label>
         <mat-select>
-            <mat-option [value]="payment" *ngFor="let payment of payments">{{payment}}</mat-option>
+            <mat-option [value]="data.payment" *ngFor="let payment of payments">{{payment}}</mat-option>
         </mat-select>
     </mat-form-field>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onCancel()">Cancelar</button>
-    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Confirmar Venda</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Confirmar Venda</button>
 </div>

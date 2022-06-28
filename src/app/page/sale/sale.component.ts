@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import parseMoney from 'parse-money';
 import { ProductService } from 'src/app/service/product.service';
+import { SaleService } from 'src/app/service/sale.service';
 import { SaleDialogComponent } from '../sale-dialog/sale-dialog.component';
 import { ProductSold } from './productSold';
 import { Sale } from './sale';
@@ -26,11 +28,14 @@ export class SaleComponent implements OnInit {
   mensagemErros: String[] = []; //array de strings dos erros retornados do backend
   animal: string;
   name: string;
-  totalPagar: any;
   statusCaixa = "Caixa Livre";
+  payment: String;
+  data: any
+  pagar: any;
 
   constructor(
     private productService: ProductService,
+    private saleService: SaleService,
     private formBilder: FormBuilder,
     private snackBar: MatSnackBar,
     public dialog: MatDialog
@@ -59,13 +64,46 @@ export class SaleComponent implements OnInit {
   }
 
   openDialog(): void {
+    //abrir dialog
     let dialogRef = this.dialog.open(SaleDialogComponent, {
       width: '500px',
-      data: { name: this.name, animal: this.totalPagar }
+      data: {
+        //itens que serão levados do pdv para o dialog
+        pagar: this.pagar
+      }
     });
-
+    //confirmar venda
     dialogRef.afterClosed().subscribe(result => {
-      this.animal = result;
+      console.log(result.pagar);
+      console.log(result.pago);
+      console.log(result.troco);
+      console.log(parseFloat(result.pago.replace(",",".")));
+      console.log(parseFloat(result.troco.replace(",",".")));
+      // this.data = result;
+      const venda = new Sale(
+        0,
+        result.pagar,
+        parseFloat(result.pago.replace(",",".")),
+        // parseMoney(result.troco)?.amount.toFixed(2),
+        parseFloat(result.troco.replace(",",".")),
+        "DINHEIRO",
+        this.productsSolds
+        );
+
+      console.log(venda);
+      //salvar venda
+      this.saleService.save(venda).subscribe(resposta => {
+        this.snackBar.open('Venda realizada com sucesso!', 'Sucesso', {
+          duration: 2000
+        })
+        //limpar formulário
+        this.limparFormulario;
+      }, errorResponse => {
+        // exibir mensagem snackbar
+        this.snackBar.open(errorResponse.error.message, 'ERRO', {
+          duration: 2000
+        })
+      })
     });
   }
 
@@ -87,7 +125,7 @@ export class SaleComponent implements OnInit {
   }
 
   getTotalCost() {
-    this.totalPagar = this.productsSolds.map(t => t.priceTotal).reduce((acc, value) => acc + value, 0)
-    return this.totalPagar;
+    this.pagar = this.productsSolds.map(t => t.priceTotal).reduce((acc, value) => acc + value, 0)
+    return this.pagar;
   }
 }
