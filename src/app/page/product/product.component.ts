@@ -130,9 +130,9 @@ export class ProductComponent implements OnInit {
 
   //chamar a paginação
   paginar(event: PageEvent) {
-    this.pagina = event.pageIndex;// setar a pagina que deseja ir
-    this.tamanho = event.pageSize; // quantidade de linhas
-    this.listarProductes(this.pagina, this.tamanho);// chama o listar contatos passando a pagina e o tamanho
+    this.pagina = event.pageIndex;
+    this.tamanho = event.pageSize;
+    this.listarProductes(this.pagina, this.tamanho);
   }
 
   openDialog(id: number) {

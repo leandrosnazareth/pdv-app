@@ -17,8 +17,6 @@ export class SaleComponent implements OnInit {
 
   productsSolds: ProductSold[] = [];
   formAddItem: FormGroup;
-  //lista de products para exiboir
-  sales: Sale[] = [];
   //ordem das colunas no html 
   ordemColunasTabela = ['id', 'quantity', 'name', 'price', 'priceTotal'];
   totalElementos = 0;
@@ -26,13 +24,9 @@ export class SaleComponent implements OnInit {
   tamanho = 5;
   pageSizeOptions: number[] = [5, 10, 15, 100]; // [10,20,30] quantidade de item por página
   mensagemErros: String[] = []; //array de strings dos erros retornados do backend
-  animal: string;
-  name: string;
   statusCaixa = "Caixa Livre";
-  payment: String;
   data: any
   pagar: any;
-  salevenda: Sale;
 
   constructor(
     private productService: ProductService,
@@ -60,10 +54,6 @@ export class SaleComponent implements OnInit {
     this.statusCaixa = "Caixa Livre";
   }
 
-  submit() {
-
-  }
-
   openDialog(): void {
     //abrir dialog
     let dialogRef = this.dialog.open(SaleDialogComponent, {
@@ -84,9 +74,6 @@ export class SaleComponent implements OnInit {
         "DINHEIRO",
         this.productsSolds
       );
-
-      console.log(venda);
-      this.salevenda = venda;
 
       // salvar venda
       this.saleService.save(venda).subscribe(resposta => {

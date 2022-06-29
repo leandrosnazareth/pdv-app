@@ -1,0 +1,71 @@
+<main class="c-main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12"></div>
+            <div class="alert alert-danger" role="alert" *ngFor="let erro of mensagemErros">
+                {{ erro }}
+            </div>
+        </div>
+        <div class="mat-elevation-z8">
+            <mat-card>
+                <mat-card-title>
+                    <mat-icon>attach_money</mat-icon>
+                    Vendas
+                </mat-card-title>
+                <mat-card>
+                    <!-- //inicio da tabela -->
+                    <table mat-table [dataSource]="sales" class="full-width">
+                        <!-- Coluna ID -->
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef> ID </th>
+                            <td mat-cell *matCellDef="let sale"> {{ sale.id }} </td>
+                        </ng-container>
+
+                        <!-- Coluna Nome -->
+                        <ng-container matColumnDef="amount">
+                            <th mat-header-cell *matHeaderCellDef> Cobrado </th>
+                            <td mat-cell *matCellDef="let sale"> {{ sale.amount | currency:'BRL'}} </td>
+                        </ng-container>
+
+                        <!-- Coluna preco -->
+                        <ng-container matColumnDef="amountPaid">
+                            <th mat-header-cell *matHeaderCellDef>Pago</th>
+                            <td mat-cell *matCellDef="let sale"> {{ sale.amountPaid | currency:'BRL'}} </td>
+                        </ng-container>
+
+                        <!-- Coluna preco -->
+                        <ng-container matColumnDef="difference">
+                            <th mat-header-cell *matHeaderCellDef>Troco</th>
+                            <td mat-cell *matCellDef="let sale"> {{ sale.difference | currency:'BRL'}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="payment">
+                            <th mat-header-cell *matHeaderCellDef> Pagamento </th>
+                            <td mat-cell *matCellDef="let sale"> {{ sale.payment }} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="excluir">
+                            <th mat-header-cell *matHeaderCellDef>Excluir</th>
+                            <td mat-cell *matCellDef="let sale">
+                                <button (click)="openDialog(sale.id)" mat-icon-button color="warn">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <!-- definir como vai ser as linhas e a ordem das colunas -->
+                        <tr mat-header-row *matHeaderRowDef="ordemColunasTabela"></tr>
+                        <tr mat-row *matRowDef="let row; columns: ordemColunasTabela;"></tr>
+                    </table>
+
+                    <!-- paginação -->
+                    <mat-paginator [length]="totalElementos" [pageSize]="tamanho" [pageSizeOptions]="pageSizeOptions"
+                        (page)="paginar($event)">
+                        <!-- evento de paginar -->
+                    </mat-paginator>
+
+                </mat-card>
+            </mat-card>
+        </div>
+    </div>
+</main>

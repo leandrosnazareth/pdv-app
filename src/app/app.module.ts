@@ -39,6 +39,7 @@ import { SaleComponent } from './page/sale/sale.component';
 import { ProductService } from './service/product.service';
 import { ConfirmaDeleteComponent } from './util/confirma-delete/confirma-delete.component';
 import { PaymentService } from './service/payment.service';
+import { SalesListComponent } from './page/sales-list/sales-list.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -51,7 +52,8 @@ registerLocaleData(localePt, 'pt-BR');
     ConfirmaDeleteComponent,
     ProductComponent,
     SaleComponent,
-    SaleDialogComponent
+    SaleDialogComponent,
+    SalesListComponent
   ],
   imports: [
     BrowserModule,

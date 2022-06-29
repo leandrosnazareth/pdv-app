@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { PaginacaoSale } from '../page/sale/paginacaoSales';
 import { Sale } from '../page/sale/sale';
 
 @Injectable({
@@ -15,5 +16,14 @@ export class SaleService {
 
   save(sale: Sale): Observable<Sale> {
     return this.http.post<Sale>(this.apiURL, sale);
+  }
+
+  list(page: number, size: number): Observable<PaginacaoSale> {
+    const params = new HttpParams().set('page', page.toString()).set('size', size.toString());
+    return this.http.get<any>(`${this.apiURL}?${params.toString()}`);
+  }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiURL}/${id}`);
   }
 }
