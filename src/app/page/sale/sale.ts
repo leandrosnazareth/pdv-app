@@ -1,19 +1,19 @@
 export class Sale {
 
-    id: number;
-    valorTotal: any;
-    valorPago: any;
-    troco: any;
-    formaPagamento: any;
+    id: any;
+    amount: any;
+    amountPaid: any;
+    difference: any;
+    payment: any;
     productSolds: any;
 
-    constructor(id: number, valorTotal: any, valorPago: any, troco: any,
-        formaPagamento: any, productSolds: any) {
+    constructor(id: any, amount: any, amountPaid: any, difference: any,
+        payment: any, productSolds: any) {
         this.id = id;
-        this.valorTotal = valorTotal;
-        this.valorPago = valorPago;
-        this.troco = troco;
-        this.formaPagamento = formaPagamento;
+        this.amount = amount;
+        this.amountPaid = amountPaid;
+        this.difference = difference;
+        this.payment = payment;
         this.productSolds = productSolds;
     }
 }

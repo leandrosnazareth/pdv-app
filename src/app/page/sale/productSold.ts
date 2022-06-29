@@ -1,12 +1,12 @@
 export class ProductSold {
 
-    id: number;
+    id: any;
     product: any;
     price: any;
     priceTotal: any;
     quantity: number;
 
-    constructor(id: number, product: any, price: any, priceTotal: any, quantity: number) {
+    constructor(id: any, product: any, price: any, priceTotal: any, quantity: number) {
         this.id = id;
         this.product = product;
         this.price = price;

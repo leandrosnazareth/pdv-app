@@ -32,6 +32,7 @@ export class SaleComponent implements OnInit {
   payment: String;
   data: any
   pagar: any;
+  salevenda: Sale;
 
   constructor(
     private productService: ProductService,
@@ -74,24 +75,20 @@ export class SaleComponent implements OnInit {
     });
     //confirmar venda
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result.pagar);
-      console.log(result.pago);
-      console.log(result.troco);
-      console.log(parseFloat(result.pago.replace(",",".")));
-      console.log(parseFloat(result.troco.replace(",",".")));
       // this.data = result;
       const venda = new Sale(
-        0,
+        null,
         result.pagar,
-        parseFloat(result.pago.replace(",",".")),
-        // parseMoney(result.troco)?.amount.toFixed(2),
-        parseFloat(result.troco.replace(",",".")),
+        parseFloat(result.pago.replace(",", ".")),
+        parseFloat(result.troco.replace(",", ".")),
         "DINHEIRO",
         this.productsSolds
-        );
+      );
 
       console.log(venda);
-      //salvar venda
+      this.salevenda = venda;
+
+      // salvar venda
       this.saleService.save(venda).subscribe(resposta => {
         this.snackBar.open('Venda realizada com sucesso!', 'Sucesso', {
           duration: 2000
@@ -112,12 +109,13 @@ export class SaleComponent implements OnInit {
     this.productService.findProductById(formValues.id).subscribe((response) => {
       const total = response.price * formValues.quantidade;
       const productSold = new ProductSold(
-        0,
+        null,
         response,
         response.price,
         total,
         formValues.quantidade
       );
+
       this.productsSolds = this.productsSolds.concat(productSold);
       // this.statusCaixa = response.name;
       this.statusCaixa = "Venda em Aberto";
