@@ -55,40 +55,47 @@ export class SaleComponent implements OnInit {
   }
 
   openDialog(): void {
-    //abrir dialog
-    let dialogRef = this.dialog.open(SaleDialogComponent, {
-      width: '500px',
-      data: {
-        //itens que serão levados do pdv para o dialog
-        pagar: this.pagar
-      }
-    });
-    //confirmar venda
-    dialogRef.afterClosed().subscribe(result => {
-      // this.data = result;
-      const venda = new Sale(
-        null,
-        result.pagar,
-        parseFloat(result.pago.replace(",", ".")),
-        parseFloat(result.troco.replace(",", ".")),
-        "DINHEIRO",
-        this.productsSolds
-      );
-
-      // salvar venda
-      this.saleService.save(venda).subscribe(resposta => {
-        this.snackBar.open('Venda realizada com sucesso!', 'Sucesso', {
-          duration: 2000
-        })
-        //limpar formulário
-        this.limparFormulario;
-      }, errorResponse => {
-        // exibir mensagem snackbar
-        this.snackBar.open(errorResponse.error.message, 'ERRO', {
-          duration: 2000
-        })
+    //verificar se existe itens na tabela
+    if (this.productsSolds.length <= 0) {
+      this.snackBar.open('É necessário inserir ao menos um item para realizar a venda venda!', 'Atenção', {
+        duration: 3000
       })
-    });
+    } else {
+      //abrir dialog
+      let dialogRef = this.dialog.open(SaleDialogComponent, {
+        width: '500px',
+        data: {
+          //itens que serão levados do pdv para o dialog
+          pagar: this.pagar
+        }
+      });
+      //confirmar venda
+      dialogRef.afterClosed().subscribe(result => {
+        // this.data = result;
+        const venda = new Sale(
+          null,
+          result.pagar,
+          parseFloat(result.pago.replace(",", ".")),
+          parseFloat(result.troco.replace(",", ".")),
+          "DINHEIRO",
+          this.productsSolds
+        );
+
+        // salvar venda
+        this.saleService.save(venda).subscribe(resposta => {
+          this.snackBar.open('Venda realizada com sucesso!', 'Sucesso', {
+            duration: 2000
+          })
+          //limpar formulário
+          this.limparFormulario;
+        }, errorResponse => {
+          // exibir mensagem snackbar
+          this.snackBar.open(errorResponse.error.message, 'ERRO', {
+            duration: 2000
+          })
+        })
+      });
+    }
   }
 
   adicionarItem() {

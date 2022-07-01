@@ -86,8 +86,8 @@ export class ProductComponent implements OnInit {
     this.formulario = this.formBilder.group({
       //validando os dados do formulário
       id: [null, Validators.nullValidator],
-      name: [null, [Validators.maxLength(50)]],
-      price: [null, Validators.required],
+      name: [null, [Validators.minLength(3), Validators.maxLength(50)]],
+      price: [null, [Validators.minLength(1), Validators.maxLength(6)]],
       active: [null, Validators.required],
     })
   }
@@ -124,7 +124,7 @@ export class ProductComponent implements OnInit {
       this.formulario.controls.id.setValue(id);
       this.formulario.controls.name.setValue(response.name);
       this.formulario.controls.price.setValue((response.price+"").replace(".",","));
-      this.formulario.controls.active.setValue(response.active);
+      this.formulario.controls['active'].setValue(response.active?'true':'false');
     })
   }
 

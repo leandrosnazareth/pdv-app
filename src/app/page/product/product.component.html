@@ -30,25 +30,29 @@
 
                                 <mat-form-field class="full-width" appearance="fill">
                                     <mat-label>Nome</mat-label>
-                                    <input formControlName="name" matInput placeholder="Digite seu nome">
+                                    <input formControlName="name" matInput placeholder="Digite seu nome" minlength="3"
+                                        maxlength="50" required>
                                 </mat-form-field>
 
                                 <mat-form-field class="full-width" appearance="fill">
-                                    <mat-label>Preço *</mat-label>
+                                    <mat-label>Preço</mat-label>
                                     <span matPrefix>R$ &nbsp;</span>
                                     <input maxlength="20" formControlName="price" mask="separator.2"
-                                        thousandSeparator="." matInput placeholder="1.000,00" required>
+                                        thousandSeparator="." matInput placeholder="1.000,00" minlength="1"
+                                        maxlength="6" required>
                                     <mat-error *ngIf="formulario.controls.price.hasError('required')">Preço é
                                         obrigatório! Informe 0 para itens sem preço.
                                     </mat-error>
                                 </mat-form-field>
 
                                 <mat-form-field class="full-width" appearance="fill">
-                                    <mat-label>Situação da conta *</mat-label>
+                                    <mat-label>Situação do produto</mat-label>
                                     <mat-select formControlName="active" required>
                                         <mat-option value="true">Ativo</mat-option>
                                         <mat-option value="false">Inativo</mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="formulario.controls.active.hasError('required')">Status
+                                        é obrigatório!</mat-error>
                                 </mat-form-field>
 
                                 <div class="row justify-content-between">
@@ -72,12 +76,12 @@
                                 <!-- verifica se tem erros no preenchimento do campo e se inicio o preenchimento -->
                                 <div *ngIf="formulario.controls.name.errors && !formulario.controls.name.pristine"
                                     class="alert alert-warning" role="alert">
-                                    Campo nome é obrigatório!
+                                    Campo nome deve conter entre 3 e 50 caracteres!
                                 </div>
                                 <!-- verifica se tem erros no preenchimento do campo e se inicio o preenchimento -->
                                 <div *ngIf="formulario.controls.price.errors && !formulario.controls.price.pristine"
                                     class="alert alert-warning" role="alert">
-                                    Campo preço é obrigatório!
+                                    Verifique o preço informado!
                                 </div>
                             </div>
                         </mat-card>
