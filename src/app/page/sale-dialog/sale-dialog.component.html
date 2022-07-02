@@ -8,18 +8,21 @@
     <br>
     <mat-form-field appearance="fill">
         <mat-label>Valor Total</mat-label>
-        <input matInput [(ngModel)]="data.pago">
+        <input matInput id="pago"  name ="pago" [(ngModel)]="data.pago" mask="separator.2" thousandSeparator="." placeholder="1.000,00"
+            minlength="1" maxlength="6" required>
     </mat-form-field>
     <br>
     <mat-form-field appearance="fill">
         <mat-label>Valor Total</mat-label>
-        <input matInput [(ngModel)]="data.troco">
+        <input matInput id="troco" name ="troco" [(ngModel)]="data.troco" mask="separator.2" thousandSeparator="." placeholder="1.000,00"
+            minlength="1" maxlength="6" required>
     </mat-form-field>
     <br>
     <mat-form-field appearance="fill">
         <mat-label>Selecione</mat-label>
-        <mat-select>
-            <mat-option [value]="data.payment" *ngFor="let payment of payments">{{payment}}</mat-option>
+        <mat-select id="pagamento"  name ="pagamento" [(value)]="data.payment">
+            <mat-option [value]="payment" *ngFor="let payment of payments">{{payment}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
 </div>

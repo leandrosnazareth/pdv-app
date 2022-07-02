@@ -77,25 +77,34 @@ export class SaleComponent implements OnInit {
           result.pagar,
           parseFloat(result.pago.replace(",", ".")),
           parseFloat(result.troco.replace(",", ".")),
-          "DINHEIRO",
+          result.payment,
           this.productsSolds
         );
 
+        console.log(result.payment);
+        console.log(venda);
+
         // salvar venda
-        this.saleService.save(venda).subscribe(resposta => {
-          this.snackBar.open('Venda realizada com sucesso!', 'Sucesso', {
-            duration: 2000
-          })
-          //limpar formulário
-          this.limparFormulario;
-        }, errorResponse => {
-          // exibir mensagem snackbar
-          this.snackBar.open(errorResponse.error.message, 'ERRO', {
-            duration: 2000
-          })
-        })
+        // this.saleService.save(venda).subscribe(resposta => {
+        //   this.snackBar.open('Venda realizada com sucesso!', 'Sucesso', {
+        //     duration: 2000
+        //   })
+        //   //limpar formulário
+        //   this.load();
+        // }, errorResponse => {
+        //   // exibir mensagem snackbar
+        //   this.snackBar.open(errorResponse.error.message, 'ERRO', {
+        //     duration: 2000
+        //   })
+        // })
       });
     }
+  }
+
+  load() {
+    //Session storage salva os dados como string
+    (sessionStorage.refresh == 'true' || !sessionStorage.refresh) && location.reload();
+    sessionStorage.refresh = true;
   }
 
   adicionarItem() {
