@@ -85,18 +85,18 @@ export class SaleComponent implements OnInit {
         console.log(venda);
 
         // salvar venda
-        // this.saleService.save(venda).subscribe(resposta => {
-        //   this.snackBar.open('Venda realizada com sucesso!', 'Sucesso', {
-        //     duration: 2000
-        //   })
-        //   //limpar formulário
-        //   this.load();
-        // }, errorResponse => {
-        //   // exibir mensagem snackbar
-        //   this.snackBar.open(errorResponse.error.message, 'ERRO', {
-        //     duration: 2000
-        //   })
-        // })
+        this.saleService.save(venda).subscribe(resposta => {
+          this.snackBar.open('Venda realizada com sucesso!', 'Sucesso', {
+            duration: 2000
+          })
+          //limpar formulário
+          this.load();
+        }, errorResponse => {
+          // exibir mensagem snackbar
+          this.snackBar.open(errorResponse.error.message, 'ERRO', {
+            duration: 2000
+          })
+        })
       });
     }
   }
