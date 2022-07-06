@@ -1,32 +1,30 @@
 <h1 mat-dialog-title>Fechamento de venda</h1>
-<div mat-dialog-content>
-    <p>Informe os dados para pagamento!</p>
+<div mat-dialog-content class="full-width">
     <mat-form-field appearance="fill">
-        <mat-label>Valor Total</mat-label>
-        <input matInput id="pagar"  name ="pagar"  [(ngModel)]="data.pagar">
+        <mat-label>Valor Total a Pagar</mat-label>
+        <input matInput id="pagar" name="pagar" [(ngModel)]="data.pagar" type="number" readonly>
     </mat-form-field>
     <br>
     <mat-form-field appearance="fill">
-        <mat-label>Valor Total</mat-label>
-        <input matInput id="pago"  name ="pago" [(ngModel)]="data.pago" mask="separator.2" thousandSeparator="." placeholder="1.000,00"
-            minlength="1" maxlength="6" required>
+        <mat-label>Valor Pago</mat-label>
+        <input matInput id="pago" name="pago" [(ngModel)]="data.pago" placeholder="1.000,00" minlength="1" maxlength="6"
+            type="number" (ngModelChange)="calc()" required>
     </mat-form-field>
     <br>
     <mat-form-field appearance="fill">
-        <mat-label>Valor Total</mat-label>
-        <input matInput id="troco" name ="troco" [(ngModel)]="data.troco" mask="separator.2" thousandSeparator="." placeholder="1.000,00"
-            minlength="1" maxlength="6" required>
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="fill">
-        <mat-label>Selecione</mat-label>
-        <mat-select id="pagamento"  name ="pagamento" [(value)]="data.payment">
+        <mat-label>Forma de pagamento</mat-label>
+        <mat-select id="pagamento" name="pagamento" [(value)]="data.payment" required>
             <mat-option [value]="payment" *ngFor="let payment of payments">{{payment}}
             </mat-option>
         </mat-select>
     </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Troco</mat-label>
+        <input matInput id="troco" name="troco" [(ngModel)]="data.troco" readonly>
+    </mat-form-field>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onCancel()">Cancelar</button>
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Confirmar Venda</button>
+    <button [disabled]="data.troco<0" mat-button [mat-dialog-close]="data" cdkFocusInitial>Confirmar Venda</button>
 </div>

@@ -9,6 +9,7 @@ import { Payment } from '../payment/payment';
 })
 export class SaleDialogComponent {
   payments: Payment[] = [];
+  troco = 0.0;
 
   constructor(
     public dialogRef: MatDialogRef<SaleDialogComponent>,
@@ -27,5 +28,9 @@ export class SaleDialogComponent {
     this.paymentService.findAll().subscribe((response) => {
       this.payments = response;
     });
+  }
+  calc() {
+    this.troco = this.data.pago - this.data.pagar;
+    this.data.troco = String(this.troco.toFixed(2));
   }
 }

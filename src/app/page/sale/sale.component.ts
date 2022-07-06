@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import parseMoney from 'parse-money';
 import { ProductService } from 'src/app/service/product.service';
 import { SaleService } from 'src/app/service/sale.service';
 import { SaleDialogComponent } from '../sale-dialog/sale-dialog.component';
@@ -63,7 +62,7 @@ export class SaleComponent implements OnInit {
     } else {
       //abrir dialog
       let dialogRef = this.dialog.open(SaleDialogComponent, {
-        width: '500px',
+        width: '300px',
         data: {
           //itens que serão levados do pdv para o dialog
           pagar: this.pagar
@@ -75,14 +74,11 @@ export class SaleComponent implements OnInit {
         const venda = new Sale(
           null,
           result.pagar,
-          parseFloat(result.pago.replace(",", ".")),
-          parseFloat(result.troco.replace(",", ".")),
+          parseFloat(String(result.pago).replace(",", ".")),
+          parseFloat(String(result.troco).replace(",", ".")),
           result.payment,
           this.productsSolds
         );
-
-        console.log(result.payment);
-        console.log(venda);
 
         // salvar venda
         this.saleService.save(venda).subscribe(resposta => {
