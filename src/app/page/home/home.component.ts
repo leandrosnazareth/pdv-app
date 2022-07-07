@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SaleService } from 'src/app/service/sale.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  totalVendas: number;
+
+  constructor(
+    private saleService: SaleService
+  ) { }
 
   ngOnInit() {
+    this.somarVendas();
   }
 
+  somarVendas() {
+    this.saleService.somaTotal().subscribe((response) => {
+      this.totalVendas = response;
+    })
+  }
 }

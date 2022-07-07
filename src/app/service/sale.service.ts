@@ -26,4 +26,9 @@ export class SaleService {
   delete(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiURL}/${id}`);
   }
+
+  somaTotal() : Observable<any>{
+    return this.http.get<any>(`${this.apiURL}/somatotal`);
+  }
+  
 }
