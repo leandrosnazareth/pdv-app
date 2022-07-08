@@ -2,46 +2,60 @@
     <div class="container-fluid">
         <mat-card class="mb-4">
             <div class="row">
-                <div class="col-sm-2">
-                    <div class="c-callout c-callout-info b-t-1 b-r-1 b-b-1">
-                        <small class="text-muted">Quantidade Vendas</small><br>
-                        <strong class="h4">{{totalVendas | currency:'BRL'}}</strong>
+                <!--/.col quantidade venda-->
+                <div class="col-md-3">
+                    <div class="card text-white bg-info">
+                        <div class="card-body">
+                            <mat-icon>local_convenience_store</mat-icon>
+                            <h1>{{totalVendas}} vendas</h1>
+                            <h4>Quantidade de vendas realizadas</h4>
+                            <div class="progress progress-white progress-thin mt-3">
+                                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!--/.col-->
-                <div class="col-sm-2">
-                    <div class="c-callout c-callout-danger b-t-1 b-r-1 b-b-1">
-                        <small class="text-muted">Total Vendas</small><br>
-                        <strong class="h4">{{totalVendas | currency:'BRL'}}</strong>
+                <!--/.col valor total venda-->
+                <div class="col-md-3">
+                    <div class="card text-white bg-success">
+                        <div class="card-body">
+                            <mat-icon>paid</mat-icon>
+                            <h1>{{valorVendas | currency:'BRL'}} vendidos</h1>
+                            <h4>Valor total vendido</h4>
+                            <div class="progress progress-white progress-thin mt-3">
+                                <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!--/.col-->
-                <div class="col-sm-2">
-                    <div class="c-callout c-callout-warning b-t-1 b-r-1 b-b-1">
-                        <small class="text-muted">Vendas do mês</small><br>
-                        <strong class="h4">{{totalVendas | currency:'BRL'}}</strong>
+                <!--/.col total produtos cadastrados -->
+                <div class="col-md-3">
+                    <div class="card text-white bg-warning">
+                        <div class="card-body">
+                            <mat-icon>splitscreen</mat-icon>
+                            <h1>{{produtosCadastrados}} produtos</h1>
+                            <h4>Quantidade de produtos cadastrados</h4>
+                            <div class="progress progress-white progress-thin mt-3">
+                                <div class="progress-bar" role="progressbar" style="width: 18%" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!--/.col-->
-                <div class="col-sm-2">
-                    <div class="c-callout c-callout-success b-t-1 b-r-1 b-b-1">
-                        <small class="text-muted">Produtos Cadastrados</small><br>
-                        <strong class="h4">{{totalVendas | currency:'BRL'}}</strong>
-                    </div>
-                </div>
-                <!--/.col-->
-                <div class="col-sm-2">
-                    <div class="c-callout b-t-1 b-r-1 b-b-1">
-                        <small class="text-muted">Produtos Ativos</small><br>
-                        <strong class="h4">{{totalVendas | currency:'BRL'}}</strong>
-                    </div>
-                </div>
-                <!--/.col-->
-                <div class="col-sm-2">
-                    <div class="c-callout c-callout-primary b-t-1 b-r-1 b-b-1">
-                        <small class="text-muted">Produtos Inativos</small><br>
-                        <strong class="h4">{{totalVendas | currency:'BRL'}}</strong>
-                        <P>TESTE</P>
+                <!--/.col produtos ativos-->
+                <div class="col-md-3">
+                    <div class="card text-white bg-danger">
+                        <div class="card-body">
+                            <mat-icon>toggle_on</mat-icon>
+                            <h1>{{produtosAtivos}} produtos ativos</h1>
+                            <h4>Quantidade de produtos ativos</h4>
+                            <div class="progress progress-white progress-thin mt-3">
+                                <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--/.col-->
@@ -49,6 +63,7 @@
             <!--/.row-->
         </mat-card>
     </div>
+
     <div class="container-fluid">
         <mat-card class="mb-4">
             <mat-card-header>

@@ -34,4 +34,12 @@ export class ProductService {
   delete(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiURL}/${id}`);
   }
+
+  totalProdutos(): Observable<any>{
+    return this.http.get<any>(`${this.apiURL}/count`);
+  }
+
+  totalProdutosAtivos(): Observable<any>{
+    return this.http.get<any>(`${this.apiURL}/active`);
+  }
 }
