@@ -40,6 +40,8 @@ import { SalesListComponent } from './page/sales-list/sales-list.component';
 import { PaymentService } from './service/payment.service';
 import { ProductService } from './service/product.service';
 import { ConfirmaDeleteComponent } from './util/confirma-delete/confirma-delete.component';
+import { Chart } from 'chart.js';
+import { SaleService } from './service/sale.service';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -95,6 +97,7 @@ registerLocaleData(localePt, 'pt-BR');
   providers: [
     ProductService,
     PaymentService,
+    SaleService,
     //informar formato da data local
     { provide: LOCALE_ID, useValue: 'pt-BR' }
     // { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
