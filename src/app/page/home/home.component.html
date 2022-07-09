@@ -67,47 +67,49 @@
     <div class="container-fluid">
         <mat-card class="mb-4">
             <mat-card-header>
-                <mat-card-title>Card Title </mat-card-title>
-                <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                <mat-card-title>Dashboard</mat-card-title>
+                <mat-card-subtitle>ultimas vendas realizadas</mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content>
-                <div class="row">
-                    <div class="col-sm">
-                        <mat-form-field>
-                            <input matInput placeholder="First Name">
-                        </mat-form-field>
-                    </div>
+            <div class="mat-elevation-z8">
+                <mat-card>
+                    <!-- //inicio da tabela -->
+                    <table mat-table [dataSource]="sales" class="full-width">
+                        <!-- Coluna ID -->
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef> Número </th>
+                            <td mat-cell *matCellDef="let sale"> {{ sale.id }} </td>
+                        </ng-container>
 
-                    <div class="col-sm">
-                        <mat-form-field>
-                            <input matInput placeholder="Last Name">
-                        </mat-form-field>
-                    </div>
-                </div>
+                        <!-- Coluna Nome -->
+                        <ng-container matColumnDef="amount">
+                            <th mat-header-cell *matHeaderCellDef> Cobrado </th>
+                            <td mat-cell *matCellDef="let sale"> {{ sale.amount | currency:'BRL'}} </td>
+                        </ng-container>
 
-                <div class="row">
-                    <div class="col-sm">
-                        <mat-form-field>
-                            <mat-label>Choose a date</mat-label>
-                            <input matInput [matDatepicker]="picker">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
-                    </div>
+                        <!-- Coluna preco -->
+                        <ng-container matColumnDef="amountPaid">
+                            <th mat-header-cell *matHeaderCellDef>Pago</th>
+                            <td mat-cell *matCellDef="let sale"> {{ sale.amountPaid | currency:'BRL'}} </td>
+                        </ng-container>
 
-                    <div class="col-sm">
-                        <mat-radio-group aria-label="Select an option">
-                            <mat-radio-button class="mt-4" value="1">Option 1</mat-radio-button>
-                            <mat-radio-button class="mt-4" value="2">Option 2</mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                </div>
-            </mat-card-content>
+                        <!-- Coluna preco -->
+                        <ng-container matColumnDef="difference">
+                            <th mat-header-cell *matHeaderCellDef>Troco</th>
+                            <td mat-cell *matCellDef="let sale"> {{ sale.difference | currency:'BRL'}} </td>
+                        </ng-container>
 
-            <mat-card-actions>
-                <button mat-button>LIKE</button>
-                <button mat-button>SHARE</button>
-            </mat-card-actions>
+                        <ng-container matColumnDef="payment">
+                            <th mat-header-cell *matHeaderCellDef> Pagamento </th>
+                            <td mat-cell *matCellDef="let sale"> {{ sale.payment }} </td>
+                        </ng-container>
+
+                        <!-- definir como vai ser as linhas e a ordem das colunas -->
+                        <tr mat-header-row *matHeaderRowDef="ordemColunasTabela"></tr>
+                        <tr mat-row *matRowDef="let row; columns: ordemColunasTabela;"></tr>
+                    </table>
+
+                </mat-card>
+            </div>
         </mat-card>
     </div>
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
 import { SaleService } from 'src/app/service/sale.service';
+import { Product } from '../product/product';
+import { Sale } from '../sale/sale';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +15,9 @@ export class HomeComponent implements OnInit {
   valorVendas: number;
   produtosCadastrados: number;
   produtosAtivos: number;
+  sales: Sale[] = [];
+  ordemColunasTabela = ['id', 'amount', 'amountPaid', 'difference', 'payment'];
+  mensagemErros: String[] = [];
 
 
   constructor(
@@ -25,6 +30,7 @@ export class HomeComponent implements OnInit {
     this.totalDeVendas();
     this.totalProdutos();
     this.totalProdutosAtivos();
+    this.listSales();
   }
 
   somarVendas() {
@@ -51,4 +57,9 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  listSales() {
+    this.saleService.salesLimit().subscribe((response) => {
+      this.sales = response;
+    });
+  }
 }

@@ -34,5 +34,8 @@ export class SaleService {
   totalVendas(): Observable<any>{
     return this.http.get<any>(`${this.apiURL}/count`);
   }
-  
+
+  salesLimit(): Observable<any>{
+    return this.http.get<any>(`${this.apiURL}/limit`);
+  }
 }

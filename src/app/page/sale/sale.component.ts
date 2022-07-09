@@ -118,6 +118,11 @@ export class SaleComponent implements OnInit {
       this.productsSolds = this.productsSolds.concat(productSold);
       // this.statusCaixa = response.name;
       this.statusCaixa = "Venda em Aberto";
+    }, errorResponse => {
+      // exibir mensagem snackbar
+      this.snackBar.open(errorResponse.error.message, 'ERRO', {
+        duration: 3000
+      })
     })
   }
 

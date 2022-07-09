@@ -100,7 +100,7 @@
                                     placeholder="ex: 1">
                             </mat-form-field>
 
-                            <button class="full-width" mat-raised-button color="primary" (click)="adicionarItem()">
+                            <button [disabled]="!formAddItem.valid" class="full-width" mat-raised-button color="primary" (click)="adicionarItem()">
                                 <mat-icon>add</mat-icon>
                                 Incluir Produto
                             </button>
