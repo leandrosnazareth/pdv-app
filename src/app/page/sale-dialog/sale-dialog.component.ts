@@ -14,7 +14,11 @@ export class SaleDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<SaleDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private paymentService: PaymentService) { }
+    private paymentService: PaymentService) {
+      this.data.pago=0;
+      this.data.payment=null;
+      this.calc();
+     }
 
   onCancel(): void {
     this.dialogRef.close();

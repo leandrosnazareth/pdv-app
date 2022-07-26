@@ -40,8 +40,8 @@ import { SalesListComponent } from './page/sales-list/sales-list.component';
 import { PaymentService } from './service/payment.service';
 import { ProductService } from './service/product.service';
 import { ConfirmaDeleteComponent } from './util/confirma-delete/confirma-delete.component';
-import { Chart } from 'chart.js';
 import { SaleService } from './service/sale.service';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -77,8 +77,8 @@ registerLocaleData(localePt, 'pt-BR');
     MatDividerModule,
     MatToolbarModule,
     MatGridListModule,
-
     FormsModule,
+    CurrencyMaskModule,
 
     MatDatepickerModule,
     HttpClientModule,
