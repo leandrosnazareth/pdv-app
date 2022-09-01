@@ -42,6 +42,8 @@ import { ProductService } from './service/product.service';
 import { ConfirmaDeleteComponent } from './util/confirma-delete/confirma-delete.component';
 import { SaleService } from './service/sale.service';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { LoginService } from './service/login.service';
+import { LoginComponent } from './page/login/login.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -55,7 +57,8 @@ registerLocaleData(localePt, 'pt-BR');
     ProductComponent,
     SaleComponent,
     SaleDialogComponent,
-    SalesListComponent
+    SalesListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -98,6 +101,7 @@ registerLocaleData(localePt, 'pt-BR');
     ProductService,
     PaymentService,
     SaleService,
+    LoginService,
     //informar formato da data local
     { provide: LOCALE_ID, useValue: 'pt-BR' }
     // { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
