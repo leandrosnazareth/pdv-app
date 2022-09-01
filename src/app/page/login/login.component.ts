@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   formulario: FormGroup;
   usuario = { username: '', password: '' };
-  token: string;
+  token: any;
 
   constructor(
     private loginService: LoginService,
@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.token == localStorage.getItem('token');
+    this.token = localStorage.getItem('token');
+    console.info(this.token + "AQUI");
     if (this.token !== null &&
       this.token.toString().trim() !== null) {
       this.router.navigate(['home']);

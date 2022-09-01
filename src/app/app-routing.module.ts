@@ -5,15 +5,16 @@ import { LoginComponent } from './page/login/login.component';
 import { ProductComponent } from './page/product/product.component';
 import { SaleComponent } from './page/sale/sale.component';
 import { SalesListComponent } from './page/sales-list/sales-list.component';
+import { GuardiaoGuard } from './service/guardiao.guard';
 
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: 'product', component: ProductComponent},
-  {path: 'sale', component: SaleComponent},
-  {path: 'sales', component: SalesListComponent},
-  {path: 'login', component: LoginComponent},
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'home', component: HomeComponent, canActivate: [GuardiaoGuard] },
+  { path: 'product', component: ProductComponent, canActivate: [GuardiaoGuard] },
+  { path: 'sale', component: SaleComponent, canActivate: [GuardiaoGuard] },
+  { path: 'sales', component: SalesListComponent, canActivate: [GuardiaoGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({
