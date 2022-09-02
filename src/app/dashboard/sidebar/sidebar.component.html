@@ -68,13 +68,10 @@
 
     <mat-divider></mat-divider>
 
-    <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" matRipple routerLink="sair" routerLinkActive="c-active">
-            <i class="c-sidebar-nav-icon">
-                <mat-icon>info</mat-icon>
-            </i> Sobre
-        </a>
-    </li>
+    <button mat-raised-button color="accent" (click)="sair()">
+        <mat-icon>logout</mat-icon>
+        Logout
+    </button>
 
     <!-- conteudo da página -->
     <ng-content></ng-content>

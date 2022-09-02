@@ -1,4 +1,5 @@
 import { Component, HostBinding, Input, HostListener, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: '[appSidebar]',
@@ -16,7 +17,7 @@ export class SidebarComponent {
     @Input()
     @HostBinding('class.c-sidebar-fixed') fixed = true;
 
-    constructor(private eRef: ElementRef) { }
+    constructor(private eRef: ElementRef, private router: Router) { }
 
     toggle(): void {
         const smalScreen = window && window.innerWidth <= 992;
@@ -51,4 +52,10 @@ export class SidebarComponent {
             }
         }
     }
+
+    public sair() {
+        localStorage.clear();
+        this.router.navigate(['login']);
+    }
+
 }
