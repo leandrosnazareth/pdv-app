@@ -40,15 +40,16 @@ export class HeaderInterceptorService implements HttpInterceptor {
       errorMessage = 'Error: ' + error.error.error;
     } else {
       if (error.status == 403) {
-        errorMessage = "Acesso negado: Faça o login novamente."
+        errorMessage = 'Código: ' + error.error.code + '\nMensagem: ' + "Acesso negado: Faça o login novamente.";
+      } else if (error.status == 404) {
+        errorMessage = 'Código: ' + error.status + '\nMensagem: ' + "Nenhum registro foi encontrado";
       } else {
-        errorMessage = 'Código: ' + error.error.code + '\nMensagem: ' + error.error.error;
+        errorMessage = 'Código: ' + error.status + '\nMensagem: ' + error.error.error;
       }
     }
     window.alert(errorMessage)
     return throwError(errorMessage);
   }
-
 }
 
 @NgModule({
