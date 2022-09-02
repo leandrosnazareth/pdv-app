@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'sale', component: SaleComponent, canActivate: [GuardiaoGuard] },
   { path: 'sales', component: SalesListComponent, canActivate: [GuardiaoGuard] },
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

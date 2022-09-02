@@ -9,9 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  title = 'Curso-Angular-REST';
   token: string;
-
 
   constructor(private router: Router) {
 

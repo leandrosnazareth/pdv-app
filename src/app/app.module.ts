@@ -44,6 +44,7 @@ import { SaleService } from './service/sale.service';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { LoginService } from './service/login.service';
 import { LoginComponent } from './page/login/login.component';
+import { HttpInterceptorModule } from './service/headerInterceptor.service';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -82,6 +83,7 @@ registerLocaleData(localePt, 'pt-BR');
     MatGridListModule,
     FormsModule,
     CurrencyMaskModule,
+    HttpInterceptorModule,//setar token no header
 
     MatDatepickerModule,
     HttpClientModule,
