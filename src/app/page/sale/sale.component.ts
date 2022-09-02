@@ -70,7 +70,6 @@ export class SaleComponent implements OnInit {
       });
       //confirmar venda
       dialogRef.afterClosed().subscribe(result => {
-        // this.data = result;
         const venda = new Sale(
           null,
           result.pagar,
@@ -105,7 +104,7 @@ export class SaleComponent implements OnInit {
 
   adicionarItem() {
     const formValues = this.formAddItem.value;
-    this.productService.findProductById(formValues.id).subscribe((response) => {
+    this.productService.findProductByIdActive(formValues.id).subscribe((response) => {
       const total = response.price * formValues.quantidade;
       const productSold = new ProductSold(
         null,
@@ -116,7 +115,6 @@ export class SaleComponent implements OnInit {
       );
 
       this.productsSolds = this.productsSolds.concat(productSold);
-      // this.statusCaixa = response.name;
       this.statusCaixa = "Venda em Aberto";
     }, errorResponse => {
       // exibir mensagem snackbar

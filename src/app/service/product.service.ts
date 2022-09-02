@@ -31,6 +31,10 @@ export class ProductService {
     return this.http.get<any>(`${this.apiURL}/${id}`);
   }
 
+  findProductByIdActive(id: number): Observable<Product> {
+    return this.http.get<any>(`${this.apiURL}/active/${id}`);
+  }
+
   delete(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiURL}/${id}`);
   }
