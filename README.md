@@ -1,4 +1,4 @@
-<h1  align="center">Bem vindo ao PDV Web!</h1>
+<h1  align="center">Bem vindo ao CARDAPIOON!</h1>
 <p  align="center">
 
 <img  src="https://i.ibb.co/S69XqSw/logopdv.png" />
@@ -12,17 +12,9 @@
 
 <img  alt="License: MIT"  src="https://img.shields.io/badge/License-MIT-yellow.svg"  target="_blank" />
 
-</a>
 
-<img  src="https://img.shields.io/github/issues/leandrosnazareth/pdv-api.svg" />
 
-<img  src="https://img.shields.io/github/forks/leandrosnazareth/pdv-api.svg" />
-
-<img  src="https://img.shields.io/github/stars/leandrosnazareth/pdv-api.svg" />
- 
-</p>
-
-**PDV Web** é um sistema, **Open Source**, de vendas de frente de caixa. O PDV é a ferramenta para registar vendas de forma rápida e confiável. Este projeto foi pensando em atender as necessidades de  pequenos empreendedores do ramo de mercearias, minimercados e afins.
+**CARDAPIOON** é um sistema, **Open Source**, de vendas de frente de caixa. O PDV é a ferramenta para registar vendas de forma rápida e confiável. Este projeto foi pensando em atender as necessidades de  pequenos empreendedores do ramo de mercearias, minimercados e afins.
 
 ## Objetivo do projeto
 Disponibilizar um projeto de código fonte **Open Source** de um sistema de vendas em PDF desenvolvido  utilizando as tecnologias listadas abaixo:
@@ -84,7 +76,7 @@ https://nodejs.org/en/download/
 
 ```
 
-1 - Git clone: https://github.com/leandrosnazareth/pdv-app
+1 - Git clone: https://github.com/Elainegioela/pdv-app
 
 2 - Abrir projeto na IDE Visual Studio Code
 
@@ -108,7 +100,7 @@ localhost:4200
 
 ## Instalação API
 
-1 - Git clone: https://github.com/leandrosnazareth/pdv-api
+1 - Git clone: https://github.com/Elainegioela/pdv-api
 
 2 - Faça o download e instalação padrão do Docker
 
@@ -140,23 +132,19 @@ localhost:8080
 
 ## Autor
 
-👤 **Leandro Nazareth**
+👤 **elainegioela**
 
-* Github: [@leandrosnazareth](https://github.com/leandrosnazareth)
+* Github: [@elainegioela](https://github.com/elainegioela.br) 
 
 ## 🤝 Contribuições
 
 Contribuições, são bem vindas!<br />
-Sinta-se à vontade para perguntar API [issues page](https://github.com/leandrosnazareth/pdv-api/issues).
-
-## Mostre seu apoio
-
-Dê uma ⭐️ se este projeto te ajudou!
+Sinta-se à vontade para perguntar API [issues page](https://github.com/elainegioela/pdv-api/issues).
 
 ## 📝 Licença
 
-Copyright © 2022 [Leandro Nazareth](https://github.com/leandrosnazareth).<br />
 
-Este projeto está sob lincença [MIT](https://github.com/leandrosnazareth/pdv-app/blob/master/LICENSE).
+
+Este projeto está sob lincença [MIT](https://github.com/elaineguioela/pdv-app/blob/master/LICENSE).
 
 Template usado no projeto [CoreUi](https://coreui.io/angular/)
