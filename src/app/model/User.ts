@@ -1,9 +1,6 @@
-export class User {
-	id: Number;
-	login: String;
-	senha: String;
-	nome: String;
-	cpf: String;
-	dataNascimento: String;
-	salario: DoubleRange;
+export interface User {
+  id?: number;
+  login: string;
+  password: string;
+  name?: string;
 }

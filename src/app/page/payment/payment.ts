@@ -1,8 +1,5 @@
-export class Payment {
-
-    name: string;
-
-    constructor(name: string) {
-        this.name = name;
-    }
+export interface Payment {
+  id?: number;
+  name: string;
+  active?: boolean;
 }

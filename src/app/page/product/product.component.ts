@@ -1,146 +1,142 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ProductService } from 'src/app/service/product.service';
-import { ConfirmaDeleteComponent } from 'src/app/util/confirma-delete/confirma-delete.component';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ProductService } from '../../service/product.service';
 import { Product } from './product';
-import parseMoney from 'parse-money';
+import { ConfirmaDeleteComponent } from '../../util/confirma-delete/confirma-delete.component';
 
 @Component({
   selector: 'app-product',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatSlideToggleModule,
+    MatTooltipModule
+  ],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
 
-  formulario: FormGroup;
-  //lista de products para exiboir
+  displayedColumns: string[] = ['name', 'description', 'price', 'quantity', 'active', 'actions'];
   products: Product[] = [];
-  //ordem das colunas no html 
-  ordemColunasTabela = ['id', 'name', 'price', 'active', 'excluir', 'editar'];
-  totalElementos = 0;
-  pagina = 0;
-  tamanho = 5;
-  pageSizeOptions: number[] = [5, 10, 15, 100]; // [10,20,30] quantidade de item por página
-  mensagemErros: String[] = []; //array de strings dos erros retornados do backend
+  totalElements = 0;
+  pageSize = 10;
+  currentPage = 0;
+
+  productForm: FormGroup;
+  editingProduct: Product | null = null;
+  showForm = false;
 
   constructor(
     private productService: ProductService,
-    private formBilder: FormBuilder,
+    private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    public dialog: MatDialog
-  ) { }
-
-  ngOnInit(): void {
-    this.montarFormulario();
-    this.listarProductes(this.pagina, this.tamanho);
-  }
-
-  submit() {
-    //pegar os dados do formulário
-    const formValues = this.formulario.value;
-    // cria e adiciona no objeto
-    const product: Product = new Product(
-      formValues.id,
-      formValues.name,
-      parseMoney(formValues.price)?.amount.toFixed(2),
-      formValues.active);
-
-    if (formValues.id) {
-      this.productService.update(product).subscribe(resposta => {
-        this.listarProductes(this.pagina, this.tamanho);
-        // exibir mensagem snackbar
-        this.snackBar.open('Produto alterado com sucesso!', 'Sucesso', {
-          duration: 2000
-        })
-        //limpar formulário
-        this.formulario.reset();
-      }, errorResponse => {
-        // exibir mensagem snackbar
-        this.snackBar.open(errorResponse.error.message, 'ERRO', {
-          duration: 2000
-        })
-      })
-    } else {
-      // cria e adiciona no objeto
-      this.productService.save(product).subscribe(resposta => {
-        this.listarProductes(this.pagina, this.tamanho);
-        // exibir mensagem snackbar
-        this.snackBar.open('Produto salvo com sucesso!', 'Sucesso', {
-          duration: 2000
-        })
-        //limpar formulário
-        this.formulario.reset();
-      }, errorResponse => {
-        // exibir mensagem snackbar
-        this.snackBar.open(errorResponse.error.message, 'ERRO', {
-          duration: 2000
-        })
-      })
-    }
-  }
-
-  montarFormulario() {
-    this.formulario = this.formBilder.group({
-      //validando os dados do formulário
-      id: [null, Validators.nullValidator],
-      name: [null, [Validators.minLength(3), Validators.maxLength(50)]],
-      price: [null, [Validators.minLength(1), Validators.maxLength(6)]],
-      active: [null, Validators.required],
-    })
-  }
-
-  limparFormulario() {
-    this.formulario.reset();
-  }
-
-  listarProductes(pagina: number, tamanho: number) {// definir a primeira página e o tamanho inicial
-    this.productService.list(pagina, tamanho).subscribe((response) => {
-      this.products = response.content; // pegar o conteudo do pag
-      this.totalElementos = response.totalElements;// pegar o total de elementos
-      this.pagina = response.number;// pegar o numero de paginas
+    private dialog: MatDialog
+  ) {
+    this.productForm = this.fb.group({
+      name: ['', [Validators.required]],
+      description: [''],
+      price: [0, [Validators.required, Validators.min(0)]],
+      quantity: [0, [Validators.required, Validators.min(0)]],
+      active: [true]
     });
   }
 
-  private excluir(id: number) {
-    this.productService.delete(id).subscribe((response) => {
-      this.ngOnInit();
-      this.mensagemErros = [];
-      // exibir mensagem snackbar
-      this.snackBar.open('Producto excluido com sucesso!', 'Sucesso', {
-        duration: 2000
-      })
-    }, errorResponse => {
-      // exibe mensagem de erro da api
-      this.mensagemErros = ['Erro: ' + errorResponse.error.message];
-    })
+  ngOnInit(): void {
+    this.loadProducts();
   }
 
-  editar(id: number) {
-    this.productService.findProductById(id).subscribe((response) => {
-      // cria e adiciona no objeto
-      this.formulario.controls.id.setValue(id);
-      this.formulario.controls.name.setValue(response.name);
-      this.formulario.controls.price.setValue((response.price+"").replace(".",","));
-      this.formulario.controls['active'].setValue(response.active?'true':'false');
-    })
+  loadProducts(): void {
+    this.productService.getAll(this.currentPage, this.pageSize).subscribe({
+      next: (data) => {
+        this.products = data.content;
+        this.totalElements = data.totalElements;
+      },
+      error: () => {
+        this.snackBar.open('Erro ao carregar produtos.', 'Fechar', { duration: 3000 });
+      }
+    });
   }
 
-  //chamar a paginação
-  paginar(event: PageEvent) {
-    this.pagina = event.pageIndex;
-    this.tamanho = event.pageSize;
-    this.listarProductes(this.pagina, this.tamanho);
+  onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.loadProducts();
   }
 
-  openDialog(id: number) {
-    const dialogRef = this.dialog.open(ConfirmaDeleteComponent);
+  openForm(product?: Product): void {
+    this.showForm = true;
+    if (product) {
+      this.editingProduct = product;
+      this.productForm.patchValue(product);
+    } else {
+      this.editingProduct = null;
+      this.productForm.reset({ active: true, price: 0, quantity: 0 });
+    }
+  }
+
+  cancelForm(): void {
+    this.showForm = false;
+    this.editingProduct = null;
+    this.productForm.reset({ active: true, price: 0, quantity: 0 });
+  }
+
+  saveProduct(): void {
+    if (this.productForm.valid) {
+      const product: Product = {
+        ...this.productForm.value,
+        id: this.editingProduct?.id
+      };
+      this.productService.save(product).subscribe({
+        next: () => {
+          this.snackBar.open('Produto salvo com sucesso!', 'Fechar', { duration: 3000 });
+          this.cancelForm();
+          this.loadProducts();
+        },
+        error: () => {
+          this.snackBar.open('Erro ao salvar produto.', 'Fechar', { duration: 3000 });
+        }
+      });
+    }
+  }
+
+  deleteProduct(product: Product): void {
+    const dialogRef = this.dialog.open(ConfirmaDeleteComponent, {
+      data: { message: `Deseja excluir o produto "${product.name}"?` }
+    });
     dialogRef.afterClosed().subscribe(result => {
-      // se clicar em ok chama evento de excluir
-      if (result) {
-        this.excluir(id);
+      if (result && product.id) {
+        this.productService.delete(product.id).subscribe({
+          next: () => {
+            this.snackBar.open('Produto excluído com sucesso!', 'Fechar', { duration: 3000 });
+            this.loadProducts();
+          },
+          error: () => {
+            this.snackBar.open('Erro ao excluir produto.', 'Fechar', { duration: 3000 });
+          }
+        });
       }
     });
   }

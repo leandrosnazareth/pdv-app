@@ -1,24 +1,15 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { UsuarioService } from './usuario.service';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { LoginService } from './login.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class GuardiaoGuard implements CanActivate {
+export const authGuard: CanActivateFn = (_route, _state) => {
+  const loginService = inject(LoginService);
+  const router = inject(Router);
 
-
-  constructor(private userServcice: UsuarioService) {
-
+  if (loginService.isLoggedIn()) {
+    return true;
   }
 
-
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.info("Chamando guardião");
-    return this.userServcice.userAutenticado();
-  }
-
-}
+  router.navigate(['/login']);
+  return false;
+};

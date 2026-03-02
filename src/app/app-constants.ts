@@ -1,18 +1,11 @@
-export class AppConstants {
+import { environment } from '../environments/environment';
 
-	public static get baseServidor(): string {
-		return "http://localhost:8080"
-	}
+export const API_URL = environment.apiUrl;
 
-	public static get baseLogin(): string {
-		return this.baseServidor + "/login"
-	}
-
-	public static get baseUrl(): string {
-		return this.baseServidor + "/user/"
-	}
-
-	public static get getBaseUrlPath(): string {
-		return this.baseServidor + "/"
-	}
-}
+export const APP_MESSAGES = {
+  SAVE_SUCCESS: 'Registro salvo com sucesso!',
+  DELETE_SUCCESS: 'Registro excluído com sucesso!',
+  ERROR: 'Ocorreu um erro. Tente novamente.',
+  LOGIN_ERROR: 'Usuário ou senha inválidos.',
+  REQUIRED_FIELD: 'Campo obrigatório.'
+};

@@ -1,0 +1,25 @@
+.sale-actions {
+  margin-bottom: 24px;
+}
+
+.sale-result {
+  background: #f1f8e9;
+  border: 1px solid #aed581;
+  border-radius: 4px;
+  padding: 16px;
+  margin-top: 16px;
+
+  h3 {
+    color: #558b2f;
+    margin-top: 0;
+  }
+
+  .items-table {
+    width: 100%;
+    margin: 16px 0;
+  }
+
+  .new-sale-action {
+    margin-top: 16px;
+  }
+}

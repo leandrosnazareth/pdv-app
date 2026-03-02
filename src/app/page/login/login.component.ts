@@ -1,43 +1,62 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/service/login.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
+  ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  public loginValid = true;
-  public username = '';
-  public password = '';
-
-  formulario: FormGroup;
-  usuario = { username: '', password: '' };
-  token: any;
+  loginForm: FormGroup;
+  loading = false;
 
   constructor(
+    private fb: FormBuilder,
     private loginService: LoginService,
-    private router: Router
-  ) { }
-
-  public onSubmit() {
-    this.usuario.username = this.username;
-    this.usuario.password = this.password;
-    this.loginService.login(this.usuario);
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
+    this.loginForm = this.fb.group({
+      login: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    });
   }
 
-  public recuperar() {
-    this.loginService.recuperar(this.usuario.username);
-  }
-
-  ngOnInit() {
-    this.token = localStorage.getItem('token');
-    if (this.token !== null &&
-      this.token.toString().trim() !== null) {
-      this.router.navigate(['home']);
+  onSubmit(): void {
+    if (this.loginForm.valid) {
+      this.loading = true;
+      const { login, password } = this.loginForm.value;
+      this.loginService.login(login, password).subscribe({
+        next: () => {
+          this.loading = false;
+          this.router.navigate(['/app']);
+        },
+        error: () => {
+          this.loading = false;
+          this.snackBar.open('Usuário ou senha inválidos.', 'Fechar', { duration: 3000 });
+        }
+      });
     }
   }
 }

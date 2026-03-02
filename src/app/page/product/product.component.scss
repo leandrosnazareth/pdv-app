@@ -1,24 +1,50 @@
-.full-width {
-    width: 100%
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .header-actions {
+    margin-left: auto;
+  }
 }
 
-.half-width {
-    width: 50%
+.product-form {
+  background: #f9f9f9;
+  padding: 16px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+
+  h3 {
+    margin-top: 0;
+    color: #3f51b5;
+  }
 }
 
-.esp-top {
-    padding-top: 10px;
-  }
-
-.esp-right {
-    padding-right: 10px;
-  }
-
-.esp-bottom {
-    padding-bottom: 10px;
-  }
-
-.esp-left {
-    padding-left: 10px;
+.form-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
 }
-  
+
+.form-field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-field-small {
+  width: 150px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.full-width-table {
+  width: 100%;
+}

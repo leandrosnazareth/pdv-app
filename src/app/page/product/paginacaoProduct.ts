@@ -1,8 +1,7 @@
-import { Product } from "./product"
-
-export class PaginacaoProduct {
-    content: Product[];
-    totalElements: number;
-    size: number;
-    number: number;
+export interface PaginacaoProduct {
+  content: any[];
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
 }

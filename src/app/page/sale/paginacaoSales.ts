@@ -1,8 +1,7 @@
-import { Sale } from "./sale"
-
-export class PaginacaoSale {
-    content: Sale[];
-    totalElements: number;
-    size: number;
-    number: number;
+export interface PaginacaoSales {
+  content: any[];
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
 }

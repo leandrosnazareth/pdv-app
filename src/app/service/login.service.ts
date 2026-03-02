@@ -1,42 +1,37 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { AppConstants } from '../app-constants';
-import { User } from '../model/User';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { API_URL } from '../app-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) {}
 
-  recuperar(login: any) {
-    let user = new User();
-    user.login = login;
-
-    return this.http.post(AppConstants.getBaseUrlPath + 'recuperar/', user).subscribe(data => {
-      alert(JSON.parse(JSON.stringify(data)).error);
-    },
-      error => {
-        console.error("Erro ao recuperar login");
-        alert('Erro ao recuperar login!')
-      }
+  login(login: string, password: string): Observable<any> {
+    return this.http.post<any>(`${API_URL}/auth/login`, { login, password }).pipe(
+      tap(response => {
+        if (response?.token) {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('user', JSON.stringify(response));
+        }
+      })
     );
   }
 
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
 
-  login(usuario: any) {
-    return this.http.post(AppConstants.baseLogin, JSON.stringify(usuario)).subscribe(data => {
-      /*Retorno Http*/
-      var token = JSON.parse(JSON.stringify(data)).Authorization.split(' ')[1];
-      localStorage.setItem("token", token);
-      this.router.navigate(['home']);
-    },
-      error => {
-        console.error("Erro ao fazer login ");
-        alert('Acesso Negado!')
-      }
-    );
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  getUser(): any {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
   }
 }

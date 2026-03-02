@@ -1,0 +1,38 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.login-card {
+  width: 400px;
+  padding: 20px;
+
+  mat-card-header {
+    justify-content: center;
+    margin-bottom: 20px;
+
+    h2 {
+      text-align: center;
+      color: #3f51b5;
+    }
+  }
+
+  .full-width {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .login-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+
+    button {
+      width: 100%;
+      padding: 8px;
+    }
+  }
+}

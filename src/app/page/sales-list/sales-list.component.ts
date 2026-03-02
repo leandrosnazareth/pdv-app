@@ -1,71 +1,88 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SaleService } from 'src/app/service/sale.service';
-import { ConfirmaDeleteComponent } from 'src/app/util/confirma-delete/confirma-delete.component';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule } from '@angular/material/chips';
+import { SaleService } from '../../service/sale.service';
 import { Sale } from '../sale/sale';
+import { ConfirmaDeleteComponent } from '../../util/confirma-delete/confirma-delete.component';
 
 @Component({
+  selector: 'app-sales-list',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatChipsModule
+  ],
   templateUrl: './sales-list.component.html',
   styleUrls: ['./sales-list.component.scss']
 })
 export class SalesListComponent implements OnInit {
 
+  displayedColumns: string[] = ['id', 'date', 'paymentName', 'totalValue', 'actions'];
   sales: Sale[] = [];
-  ordemColunasTabela = ['id', 'amount', 'amountPaid', 'difference', 'payment', 'excluir'];
-  totalElementos = 0;
-  pagina = 0;
-  tamanho = 5;
-  pageSizeOptions: number[] = [5, 10, 15, 100]; // [10,20,30] quantidade de item por página
-  mensagemErros: String[] = []; //array de strings dos erros retornados do backend
+  totalElements = 0;
+  pageSize = 10;
+  currentPage = 0;
 
   constructor(
     private saleService: SaleService,
     private snackBar: MatSnackBar,
-    public dialog: MatDialog
-  ) { }
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.listSales(this.pagina, this.tamanho);
+    this.loadSales();
   }
 
-  listSales(pagina: number, tamanho: number) {
-    this.saleService.list(pagina, tamanho).subscribe((response) => {
-      this.sales = response.content;
-      this.totalElementos = response.totalElements;
-      this.pagina = response.number;
-    });
-  }
-
-  openDialog(id: number) {
-    const dialogRef = this.dialog.open(ConfirmaDeleteComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      // se clicar em ok chama evento de excluir
-      if (result) {
-        this.excluir(id);
+  loadSales(): void {
+    this.saleService.getAll(this.currentPage, this.pageSize).subscribe({
+      next: (data) => {
+        this.sales = data.content;
+        this.totalElements = data.totalElements;
+      },
+      error: () => {
+        this.snackBar.open('Erro ao carregar vendas.', 'Fechar', { duration: 3000 });
       }
     });
   }
 
-  private excluir(id: number) {
-    this.saleService.delete(id).subscribe((response) => {
-      this.ngOnInit();
-      this.mensagemErros = [];
-      // exibir mensagem snackbar
-      this.snackBar.open('Venda excluida com sucesso!', 'Sucesso', {
-        duration: 2000
-      })
-    }, errorResponse => {
-      // exibe mensagem de erro da api
-      this.mensagemErros = ['Erro: ' + errorResponse.error.message];
-    })
+  onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.loadSales();
   }
 
-  //chamar a paginação
-  paginar(event: PageEvent) {
-    this.pagina = event.pageIndex;
-    this.tamanho = event.pageSize;
-    this.listSales(this.pagina, this.tamanho);
+  deleteSale(sale: Sale): void {
+    const dialogRef = this.dialog.open(ConfirmaDeleteComponent, {
+      data: { message: `Deseja excluir a venda #${sale.id}?` }
+    });
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result && sale.id) {
+        this.saleService.delete(sale.id).subscribe({
+          next: () => {
+            this.snackBar.open('Venda excluída com sucesso!', 'Fechar', { duration: 3000 });
+            this.loadSales();
+          },
+          error: () => {
+            this.snackBar.open('Erro ao excluir venda.', 'Fechar', { duration: 3000 });
+          }
+        });
+      }
+    });
   }
 }
